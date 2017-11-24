@@ -1,10 +1,8 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
-public abstract class Product {
+public abstract class Product implements Consumable {
 
 	public int effect;
-	
-	public abstract void changeClient(Client client);
 
 	public int getEffect() {
 		return effect;
@@ -13,5 +11,7 @@ public abstract class Product {
 	public void setEffect(int effect) {
 		this.effect = effect;
 	}
+	
+	public abstract void consumedBy(Client client);
 
 }

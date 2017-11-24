@@ -18,12 +18,12 @@ public class Server implements Runnable {
 		notifyAll();
 	}
 	
-	public void giveProductsToClient(Order order, Client client) {
-		client.consume(order);
+	public void foodReady(Order order) {
+		Client client = order.getClient();
+		client.receive(order);
 	}
 
 	public void run() {
-		// TODO Auto-generated method stub
 		
 	}
 }

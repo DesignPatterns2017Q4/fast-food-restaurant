@@ -5,15 +5,9 @@ public class HotDog extends Product implements Consumable {
 	private int effect = 2; 
 
 	@Override
-	public void changeClient(Client client) {
+	public void consumedBy(Client client) {
 		int clientHappiness = client.getHappiness();
 		client.setHappiness(clientHappiness + effect);
 	}
-
-	public void consume() {
-		
-	}
-	
-	
 
 }

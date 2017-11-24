@@ -15,9 +15,8 @@ public class Application {
 		Extra extra = new Ketchup();
 		List<Extra> listOfExtras = new ArrayList<Extra>();
 		listOfExtras.add(extra);
-		Map<Product, List<Extra>> orderedItems = new HashMap<Product, List<Extra>>();
-		orderedItems.put(product, listOfExtras);
-		Order order = new Order(client, orderedItems);
+		
+		Order order = new Order(client, product, listOfExtras);
 		Server server = new Server(client, robot, order);
 		
 		client.sendOrderToServer(server);

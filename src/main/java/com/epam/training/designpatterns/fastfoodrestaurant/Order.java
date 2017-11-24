@@ -6,10 +6,28 @@ import java.util.Map;
 public class Order {
 
 	Client client;
-	Map<Product, List<Extra>> orderedItems;
+	Product product;
+	List<Extra> extras;
 	
-	public Order(Client client, Map<Product, List<Extra>> orderedItems) {
+	public Order(Client client, Product product, List<Extra> extras) {
 		this.client = client;
-		this.orderedItems = orderedItems;
+		this.product = product;
+		this.extras = extras;
 	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public List<Extra> getExtras() {
+		return extras;
+	}
+
+	
+	
+	
 }

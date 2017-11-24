@@ -1,5 +1,8 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class Client {
@@ -15,8 +18,23 @@ public class Client {
 		server.takeOrder(order);
 	}
 	
-	public void consume(Order order) {
+	public void receive(Order order) {
+		Product product = order.getProduct();
+		List<Extra> extras = order.getExtras();
 		
+		consume(product, extras);
+	}
+
+	private void consume(Product product, List<Extra> extras) {
+		System.out.println("Consuming " + product);
+		product.consumedBy(this);
+		System.out.println("I am " + this.happiness + " happy.");
+		
+		for(Extra e : extras) {
+			System.out.print("Consuming ");
+			System.out.println(e);
+			System.out.println("I am " + this.happiness + " happy.");
+		}
 	}
 
 	public int getHappiness() {

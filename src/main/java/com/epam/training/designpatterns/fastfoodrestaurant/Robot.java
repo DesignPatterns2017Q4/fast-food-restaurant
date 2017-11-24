@@ -18,7 +18,7 @@ public class Robot implements Runnable {
 	
 	public void prepareOrder() throws InterruptedException {
 		takeSomeTime();
-		server.giveProductsToClient(order, null);
+		server.foodReady(order);
 	}
 
 	private void takeSomeTime() throws InterruptedException {
