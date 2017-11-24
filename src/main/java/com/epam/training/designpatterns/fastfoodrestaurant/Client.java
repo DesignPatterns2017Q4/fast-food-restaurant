@@ -1,19 +1,18 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
+import java.util.UUID;
+
 public class Client {
 	
 	private int happiness;
 	Order order;
-	Server server;
 	
-	public Client(Server server) {
-		super();
+	public Client() {
 		this.happiness = 0;
-		this.server = server;
 	}
 
-	void makeOrder() {
-		server.sendOrderToQueue(order);
+	void sendOrderToServer(Server server) {
+		server.takeOrder(order);
 	}
 	
 	public void consume(Order order) {

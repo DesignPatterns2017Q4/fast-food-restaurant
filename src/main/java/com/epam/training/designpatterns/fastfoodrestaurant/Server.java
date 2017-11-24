@@ -3,7 +3,7 @@ package com.epam.training.designpatterns.fastfoodrestaurant;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class Server {
+public class Server implements Runnable {
 
 	Robot robot;
 	Deque<Order> queue;
@@ -13,11 +13,17 @@ public class Server {
 		queue = new LinkedList<Order>();
 	}
 	
-	public void sendOrderToQueue(Order order, Deque<Order> queue) {
-		robot.takeOrder(order);
+	public void takeOrder(Order order) {
+		queue.push(order);
+		notifyAll();
 	}
 	
 	public void giveProductsToClient(Order order, Client client) {
 		client.consume(order);
+	}
+
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 }
