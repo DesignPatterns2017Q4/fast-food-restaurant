@@ -1,4 +1,4 @@
-package com.epam.training.designpatterns.fastfoodrestaurant.Foods;
+package com.epam.training.designpatterns.fastfoodrestaurant.foods;
 
 public class Mustard extends Condiment {
     public Mustard(Food food) {

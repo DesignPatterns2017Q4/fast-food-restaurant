@@ -1,5 +1,8 @@
-package com.epam.training.designpatterns.fastfoodrestaurant.Foods;
+package com.epam.training.designpatterns.fastfoodrestaurant.foods;
 
+/**
+ * Decorator for Foods. Doesn't add functionality, but may modify behaviors
+ */
 public abstract class Condiment implements Food {
 
     Food food;

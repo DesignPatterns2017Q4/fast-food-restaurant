@@ -1,8 +1,8 @@
-package com.epam.training.designpatterns.fastfoodrestaurant;
+package com.epam.training.designpatterns.fastfoodrestaurant.tables;
 
-import com.epam.training.designpatterns.fastfoodrestaurant.Foods.Food;
-import com.epam.training.designpatterns.fastfoodrestaurant.Foods.Menu;
-import com.epam.training.designpatterns.fastfoodrestaurant.Staff.Server;
+import com.epam.training.designpatterns.fastfoodrestaurant.foods.Food;
+import com.epam.training.designpatterns.fastfoodrestaurant.foods.Menu;
+import com.epam.training.designpatterns.fastfoodrestaurant.staff.Server;
 
 public class Client {
     private static int clientCount;

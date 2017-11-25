@@ -1,4 +1,4 @@
-package com.epam.training.designpatterns.fastfoodrestaurant.Foods;
+package com.epam.training.designpatterns.fastfoodrestaurant.foods;
 
 public class HotDog extends Edible {
     @Override

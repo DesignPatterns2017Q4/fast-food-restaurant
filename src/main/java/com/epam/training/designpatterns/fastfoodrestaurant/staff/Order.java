@@ -1,7 +1,7 @@
-package com.epam.training.designpatterns.fastfoodrestaurant.Staff;
+package com.epam.training.designpatterns.fastfoodrestaurant.staff;
 
-import com.epam.training.designpatterns.fastfoodrestaurant.Client;
-import com.epam.training.designpatterns.fastfoodrestaurant.Foods.Food;
+import com.epam.training.designpatterns.fastfoodrestaurant.tables.Client;
+import com.epam.training.designpatterns.fastfoodrestaurant.foods.Food;
 
 public class Order {
     private Client client;

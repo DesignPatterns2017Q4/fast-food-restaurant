@@ -1,6 +1,9 @@
-package com.epam.training.designpatterns.fastfoodrestaurant.Foods;
+package com.epam.training.designpatterns.fastfoodrestaurant.foods;
 
-public class Edible implements Food{
+/**
+ * Implements some methods common for all foods
+ */
+public abstract class Edible implements Food{
     private boolean prepared;
     @Override
     public void prepare() {

@@ -1,4 +1,4 @@
-package com.epam.training.designpatterns.fastfoodrestaurant.Staff;
+package com.epam.training.designpatterns.fastfoodrestaurant.staff;
 
 import java.util.Queue;
 

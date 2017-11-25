@@ -1,9 +1,13 @@
-package com.epam.training.designpatterns.fastfoodrestaurant.Foods;
+package com.epam.training.designpatterns.fastfoodrestaurant.foods;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Contains a list of classes that represent the menu.
+ * Serves as a factory for these classes.
+ */
 public class Menu {
     private static final List<Class<? extends Edible>> foods = new ArrayList<>();
     private static final List<Class<? extends Condiment >> condiments = new ArrayList<>();
@@ -23,15 +27,7 @@ public class Menu {
             e.printStackTrace();
         }
         return null;
-        //return new Meal(randomFood(foods), randomFood(condiments));
-        //randomFood(condiments)
     }
 
-    //private static <T extends Food> T randomFood(List<Class<? extends T>> list){
-    //    try {
-    //        Class<? extends T> chosenFood= list.get(Math.abs(new Random().nextInt() % list.size()));
-    //    } catch (InstantiationException | IllegalAccessException e) {
-    //        throw new RuntimeException(e);
-    //    }
-    //}
+
 }
