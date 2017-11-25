@@ -1,8 +1,6 @@
 package com.epam.training.designpatterns.fastfoodrestaurant.foods;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Contains a list of classes that represent the menu.
@@ -18,11 +16,26 @@ public class Menu {
         condiments.add(Mustard.class);
     }
 
+    /**
+     * @return a random edible food with a random number of different condiments
+     */
     public static Food randomFoodAndCondiment(){
         try {
-            Food food = foods.get(Math.abs(new Random().nextInt() % foods.size())).newInstance();
-            Class<? extends Condiment> condimentClass= condiments.get(Math.abs(new Random().nextInt() % foods.size()));
-            return condimentClass.getConstructor(Food.class).newInstance(food);
+            Food baseFood = foods.get(Math.abs(new Random().nextInt() % foods.size())).newInstance();
+
+            int numCondiments = Math.abs(new Random().nextInt() % condiments.size() + 1);
+            Set<Integer> seen = new HashSet<>();
+            Food foodWithCondiments = baseFood;
+            for (int i=0;i<numCondiments;i++){
+                int randomIndex;
+                do{
+                    randomIndex = new Random().nextInt() % condiments.size();
+                } while (seen.contains(randomIndex));
+                seen.add(randomIndex);
+                Class<? extends Condiment> condimentClass= condiments.get(randomIndex);
+                foodWithCondiments = condimentClass.getConstructor(Food.class).newInstance(foodWithCondiments);
+            }
+            return foodWithCondiments;
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }

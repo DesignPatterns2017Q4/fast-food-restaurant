@@ -1,8 +1,11 @@
 package com.epam.training.designpatterns.fastfoodrestaurant.staff;
 
-import com.epam.training.designpatterns.fastfoodrestaurant.tables.Client;
 import com.epam.training.designpatterns.fastfoodrestaurant.foods.Food;
+import com.epam.training.designpatterns.fastfoodrestaurant.tables.Client;
 
+/**
+ * Contains the order for a given client
+ */
 public class Order {
     private Client client;
 

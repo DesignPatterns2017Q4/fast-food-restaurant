@@ -33,6 +33,6 @@ public abstract class Condiment implements Food {
 
     @Override
     public String toString() {
-        return food + " with some " + this.getClass().getSimpleName();
+        return food + " and " + this.getClass().getSimpleName();
     }
 }

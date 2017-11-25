@@ -9,4 +9,8 @@ public class Ketchup extends Condiment {
     public double directHappiness(){
         return food.directHappiness() * 2;
     }
+    @Override
+    public double modifyHappiness(){
+        return food.modifyHappiness() * 2;
+    }
 }
