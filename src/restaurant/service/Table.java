@@ -6,23 +6,22 @@ import restaurant.util.Constants;
 import restaurant.util.Logger;
 import restaurant.util.Random;
 
-public class Table implements Comparable<Table> {
+public class Table {
     private static int tableCounter = 0;
     private volatile AtomicBoolean free = new AtomicBoolean(true);
     private int tableSize;
     private final String name;
 
     public Table(int size) {
+        tableCounter++;
         tableSize = size;
         name = "Table" + tableCounter;
-        Logger.logToConsole(toString() + " is created.");
+        Logger.logToErr(toString() + " is created.");
     }
 
-    public Table() {
-        tableCounter++;
-        setTableSize(Random.randInt(Constants.MIN_CLIENT_GROUP_SIZE, Constants.MAX_TABLE_SIZE));
-        name = "Table" + tableCounter;
-        Logger.logToConsole(toString() + " is created.");
+    public static Table randomTableFactory() {
+        int tableSize = Random.randInt(Constants.MIN_CLIENT_GROUP_SIZE, Constants.MAX_TABLE_SIZE);
+        return new Table(tableSize);
     }
 
     public int getTableSize() {
@@ -31,11 +30,6 @@ public class Table implements Comparable<Table> {
 
     public void setTableSize(int tableSize) {
         this.tableSize = tableSize;
-    }
-
-    @Override
-    public int compareTo(Table table) {
-        return tableSize - table.getTableSize();
     }
 
     public synchronized boolean isFree() {

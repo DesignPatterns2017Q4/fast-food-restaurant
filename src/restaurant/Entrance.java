@@ -70,7 +70,7 @@ public class Entrance {
         List<Table> tables = new ArrayList<>(Constants.TABLE_COUNT + 1);
         tables.add(new Table(Constants.MAX_CLIENT_GROUP_SIZE));
         for (int x = 0; x < Constants.TABLE_COUNT; x++) {
-            Table table = new Table();
+            Table table = Table.randomTableFactory();
             tables.add(table);
         }
         tables.sort(new TableSortingComparator());

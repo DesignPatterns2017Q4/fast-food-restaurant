@@ -27,6 +27,7 @@ public class TableService implements Runnable {
             size = tableQueue.size();
             if (size != lastSize) {
                 Logger.logToErr(tableQueue.size() + " groups are waiting for empty table." + " " + size + " - " + lastSize);
+                Logger.logToErr("Unsuitable empty tables: " + getEmptyTablesCount());
                 lastSize = size;
             }
             try {
@@ -78,5 +79,15 @@ public class TableService implements Runnable {
 
     private boolean isTableSuitable(int clientNum, Table table) {
         return table.isFree() == true && table.getTableSize() >= clientNum;
+    }
+
+    private int getEmptyTablesCount() {
+        int count = 0;
+        for (Table table : tables) {
+            if (table.isFree()) {
+                count++;
+            }
+        }
+        return count;
     }
 }
