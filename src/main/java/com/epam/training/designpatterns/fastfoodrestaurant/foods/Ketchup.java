@@ -11,6 +11,6 @@ public class Ketchup extends Condiment {
     }
     @Override
     public double modifyHappiness(){
-        return food.modifyHappiness() * 2;
+        return (food.modifyHappiness() -1) * 2 + 1;
     }
 }

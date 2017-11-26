@@ -2,11 +2,14 @@ package com.epam.training.designpatterns.fastfoodrestaurant.staff;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
+/**
+ * Takes orders from the order queue, prepares the food, and puts the cooked food in the ready queue
+ */
 public class Cook implements Runnable{
     private ArrayBlockingQueue<Order> orders;
     private ArrayBlockingQueue<Order> platesReadyToServe;
     private final int SIMULATION_SPEED;
-    public Cook(ArrayBlockingQueue<Order> orders, ArrayBlockingQueue<Order> platesReadyToServe, int simulation_speed){
+    Cook(ArrayBlockingQueue<Order> orders, ArrayBlockingQueue<Order> platesReadyToServe, int simulation_speed){
         this.orders = orders;
         this.platesReadyToServe = platesReadyToServe;
         SIMULATION_SPEED = simulation_speed;

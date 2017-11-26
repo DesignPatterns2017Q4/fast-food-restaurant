@@ -15,10 +15,7 @@ public class Order {
 
     private Food food;
 
-    public Order(Client client){
-        this.client = client;
-    }
-    public Order(Client client, Food food){
+    Order(Client client, Food food){
         this.client = client;
         this.food = food;
     }
@@ -28,7 +25,7 @@ public class Order {
         return "Order for " + client + ": " + food;
     }
 
-    public Client getClient() {
+    Client getClient() {
         return client;
     }
 }

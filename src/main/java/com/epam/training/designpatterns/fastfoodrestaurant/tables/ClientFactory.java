@@ -7,13 +7,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 public class ClientFactory {
-    private Server server;
     private Semaphore sema;
     private final int simulation_speed;
-
+    private final Server server;
     public ClientFactory(Server server, int maxClients, int simulation_speed){
         this.server = server;
-        sema = new Semaphore(maxClients);
+        this.sema = new Semaphore(maxClients);
         this.simulation_speed = simulation_speed;
     }
     private Client newClient() throws InterruptedException {
