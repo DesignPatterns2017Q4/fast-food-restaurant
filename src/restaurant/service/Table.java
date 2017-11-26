@@ -20,7 +20,7 @@ public class Table implements Comparable<Table> {
 
     public Table() {
         tableCounter++;
-        setTableSize(Random.randInt(Constants.MIN_CLIENT_GROUP_SIZE, Constants.MAX_CLIENT_GROUP_SIZE));
+        setTableSize(Random.randInt(Constants.MIN_CLIENT_GROUP_SIZE, Constants.MAX_TABLE_SIZE));
         name = "Table" + tableCounter;
         Logger.logToConsole(toString() + " is created.");
     }
@@ -50,5 +50,4 @@ public class Table implements Comparable<Table> {
     public String toString() {
         return name + "(Size: " + tableSize + ")";
     }
-
 }

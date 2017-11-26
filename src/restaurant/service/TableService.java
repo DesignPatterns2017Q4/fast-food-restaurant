@@ -1,7 +1,7 @@
 package restaurant.service;
 
 import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
 import restaurant.client.ClientGroup;
@@ -9,9 +9,9 @@ import restaurant.util.Logger;
 
 public class TableService implements Runnable {
     private BlockingQueue<ClientGroup> tableQueue;
-    private Set<Table> tables;
+    private List<Table> tables;
 
-    public TableService(BlockingQueue<ClientGroup> tableQueue, Set<Table> tables) {
+    public TableService(BlockingQueue<ClientGroup> tableQueue, List<Table> tables) {
         this.tableQueue = tableQueue;
         this.tables = tables;
     }

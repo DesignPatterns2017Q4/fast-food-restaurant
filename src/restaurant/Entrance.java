@@ -1,8 +1,8 @@
 package restaurant;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -16,6 +16,7 @@ import restaurant.service.Table;
 import restaurant.service.TableService;
 import restaurant.util.Constants;
 import restaurant.util.Logger;
+import restaurant.util.TableSortingComparator;
 
 //Creating components
 public class Entrance {
@@ -30,7 +31,7 @@ public class Entrance {
         createDesk(deskQueue, mealQueue, tableQueue);
         createChefs(mealQueue);
 
-        Set<Table> tables = Collections.synchronizedSet(createTables());
+        List<Table> tables = Collections.synchronizedList(createTables());
         createTableService(tableQueue, tables);
 
         createCassa(cassaQueue);
@@ -65,17 +66,19 @@ public class Entrance {
     }
 
     // Creating Tables
-    private static Set<Table> createTables() {
-        Set<Table> tables = new TreeSet<>();
+    private static List<Table> createTables() {
+        List<Table> tables = new ArrayList<>(Constants.TABLE_COUNT + 1);
         tables.add(new Table(Constants.MAX_CLIENT_GROUP_SIZE));
         for (int x = 0; x < Constants.TABLE_COUNT; x++) {
-            tables.add(new Table());
+            Table table = new Table();
+            tables.add(table);
         }
+        tables.sort(new TableSortingComparator());
         return tables;
     }
 
     // Creating TableService
-    private static void createTableService(BlockingQueue<ClientGroup> tableQueue, Set<Table> tables) {
+    private static void createTableService(BlockingQueue<ClientGroup> tableQueue, List<Table> tables) {
         TableService tableService = new TableService(tableQueue, tables);
         Thread tableServiceThread = new Thread(tableService);
         tableServiceThread.setName("TableService");
