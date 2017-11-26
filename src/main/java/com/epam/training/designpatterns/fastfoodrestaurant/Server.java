@@ -13,7 +13,7 @@ public class Server implements Runnable {
 		queue = new LinkedList<Order>();
 	}
 	
-	public void takeOrder(Order order) {
+	public void newOrder(Order order) {
 		queue.push(order);
 		notifyAll();
 	}

@@ -1,9 +1,6 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 public class Client {
 	
@@ -15,7 +12,7 @@ public class Client {
 	}
 
 	void sendOrderToServer(Server server) {
-		server.takeOrder(order);
+		server.newOrder(order);
 	}
 	
 	public void receive(Order order) {
