@@ -28,6 +28,10 @@ public class Client {
 		happiness = food.applyEffect(happiness);
 		System.out.printf("%s: Eating food: %s. New happiness score: %d%n", this, food, happiness);
 	}
+	
+	public int getHappiness() {
+		return happiness;
+	}
 
 	@Override
 	public String toString() {

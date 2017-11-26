@@ -35,19 +35,21 @@ public class Waiter implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (!isBusy) {
-			deliverMeals();
+			try {
+				deliverMeals();
+			} catch (InterruptedException e) {}
 		}
 	}
 
-	private void deliverMeals() {
-		isBusy = true;
-		ReadyMeal meal = deliveryQueue.getNextMeal();
-		try {
+	private void deliverMeals() throws InterruptedException {
+		while (!deliveryQueue.isEmpty()) {
+			isBusy = true;
+			ReadyMeal meal = deliveryQueue.getNextMeal();
 			System.out.printf("Waiter: Delivering order... (for client: %s)%n", meal.getClient());
 			Thread.sleep(1000 + Restaurant.random.nextInt(MAX_TIME_TO_DELIVER_MEAL));
-		} catch (InterruptedException e) {}
-		Client client = meal.getClient();
-		client.consumeFood(meal.getFood());
+			Client client = meal.getClient();
+			client.consumeFood(meal.getFood());
+		}
 		isBusy = false;
 	}
 	

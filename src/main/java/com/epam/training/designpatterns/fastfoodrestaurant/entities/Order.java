@@ -9,10 +9,10 @@ import com.epam.training.designpatterns.fastfoodrestaurant.food.Food;
 
 public class Order {
 	
-	private Food food;
 	private Client client;
-	private boolean priority;
+	private Food food;
 	private List<Condiment> condiments;
+	private boolean priority;
 	
 	private Order(Food food, Client client, List<Condiment> condiments, boolean priority) {
 		this.food = food;
@@ -39,9 +39,9 @@ public class Order {
 	
 	public static class OrderBuilder {
 		
+		Client client;
 		Food food;
 		List<Condiment> condiments = new ArrayList<>();
-		Client client;
 		boolean priority;
 		
 		public OrderBuilder(Client client, Food food) {

@@ -20,4 +20,8 @@ public class DeliveryQueue extends Observable {
 		return meals.remove();
 	}
 	
+	public boolean isEmpty() {
+		return meals.isEmpty();
+	}
+	
 }

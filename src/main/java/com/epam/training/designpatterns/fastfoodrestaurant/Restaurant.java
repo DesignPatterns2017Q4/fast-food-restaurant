@@ -26,14 +26,16 @@ public class Restaurant {
 	private Waiter waiter = new Waiter(orderQueue, deliveryQueue);
 	
 	
-	public void startSimulation() throws InterruptedException {
-		while (true) {
-			new Thread(new ClientThread()).start();
+	public void startSimulation(int maxNumberOfClients) throws InterruptedException {
+		int clientSoFar = 0;
+		while (maxNumberOfClients > clientSoFar) {
+			new Thread(new SimulatedClient()).start();
 			Thread.sleep(1000 + random.nextInt(MAX_TIME_TO_SPAWN_NEW_CLIENT));
+			clientSoFar++;
 		}
 	}
 	
-	private class ClientThread implements Runnable {
+	private class SimulatedClient implements Runnable {
 
 		@Override
 		public void run() {
@@ -57,7 +59,7 @@ public class Restaurant {
 	public static void main(String[] args) throws InterruptedException {
 		
 		Restaurant restaurant = new Restaurant();
-		restaurant.startSimulation();
+		restaurant.startSimulation(10);
 
 	}
 

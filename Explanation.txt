@@ -14,7 +14,10 @@ egy alapételre.
 
 
 3. Observer (Waiter -> DeliveryQueue, és Chef -> OrderQueue)
-A Waiter és a Chef egy-egy szálvédett FIFO-ból veszik ki a hozzájuk tartozó objektumokat.
-Az observer pattern segítségével egyből értesülni tudnak róla, hogy újabb elem érkezett, amit 
-így minél gyorsabban feldolgozhatnak,és a Queue-t se kell folyamatosan figyelniük.
+Két különbőző observer-observable kapcsolat van: egyrészt a Waiter fel van iratkozva a DeliveryQueue-ra,
+amiben a kész ételek (ReadyMeal-ek) sorakoznak, és arra várnak, hogy kivigyék az ügyfeleknek.
+A másik esetben a Chef van felirakozva az OrderQueue-ra, amiben pedig az elkészítésre várakozó rendelések
+sorakoznak, amiket a Chef-nek meg kellene főznie.
+Az observer pattern segítségével mind a Waiter, mind a Chef egyből értesülni tud róla, hogy 
+ha újabb elem érkezett, amit így minél gyorsabban feldolgozhatnak,és a Queue-t se kell folyamatosan figyelniük.
 
