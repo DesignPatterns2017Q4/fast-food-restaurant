@@ -12,12 +12,11 @@ import com.epam.training.designpatterns.fastfoodrestaurant.food.Food;
 
 public class Chef implements Observer {
 	
-	private static final int MAX_TIME_TO_PREPARE_NONPRIORITY_MEAL = 5000;
-	private static final int MAX_TIME_TO_PREPARE_PRIORITY_MEAL = 2800;
 	private OrderQueue orderQueue;
 	private DeliveryQueue deliveryQueue;
 	private boolean isBusy;
-	
+	private int cookingSpeed = 1000;
+
 	public Chef(OrderQueue orderQueue, DeliveryQueue deliveryQueue) {
 		this.orderQueue = orderQueue;
 		this.deliveryQueue = deliveryQueue;
@@ -52,8 +51,7 @@ public class Chef implements Observer {
 		List<Condiment> condiments = order.getCondiments();
 		boolean isPriority = order.isPriority();
 		
-		int preparationTime = 1000 + (isPriority ? MAX_TIME_TO_PREPARE_PRIORITY_MEAL : 
-			MAX_TIME_TO_PREPARE_NONPRIORITY_MEAL);
+		int preparationTime = isPriority ? cookingSpeed : cookingSpeed + 1000;
 		
 		System.out.printf("Chef: Preparing next meal (for client: %s, priority: %s)%n"
 				, order.getClient(), order.isPriority());
@@ -67,5 +65,10 @@ public class Chef implements Observer {
 		
 		return finishedMeal;
 	}
+	
+	public void setCookingSpeed(int cookingSpeed) {
+		this.cookingSpeed = cookingSpeed;
+	}
+
 
 }

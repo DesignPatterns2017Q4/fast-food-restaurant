@@ -4,11 +4,11 @@ import com.epam.training.designpatterns.fastfoodrestaurant.food.Food;
 
 public class ReadyMeal {
 
-	private final Food food;
+	private final Food readyMeal;
 	private final Client client;
 	
-	public Food getFood() {
-		return food;
+	public Food getReadyFood() {
+		return readyMeal;
 	}
 
 	public Client getClient() {
@@ -16,7 +16,7 @@ public class ReadyMeal {
 	}
 
 	public ReadyMeal(Food food, Client client) {
-		this.food = food;
+		this.readyMeal = food;
 		this.client = client;
 	}
 	
