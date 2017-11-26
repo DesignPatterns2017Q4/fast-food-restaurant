@@ -2,6 +2,14 @@ package com.epam.training.designpatterns.fastfoodrestaurant.food;
 
 public class Mayonnaise extends Condiment implements Food {
 
+	public Mayonnaise(Food food) {
+		super(food);
+	}
+	
+	public Mayonnaise() {
+		super();
+	}
+	
 	@Override
 	public int applyEffect(int happiness) {
 		if (baseFood != null) {
@@ -10,11 +18,6 @@ public class Mayonnaise extends Condiment implements Food {
 		else {
 			throw new RuntimeException("Cannot measure effect of a condiment on its own!");
 		}
-	}
-	
-	@Override
-	public String toString() {
-		return "Mayonnaise " + baseFood.toString();
 	}
 	
 }

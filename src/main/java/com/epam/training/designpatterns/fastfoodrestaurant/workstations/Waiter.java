@@ -25,7 +25,7 @@ public class Waiter implements Observer {
 
 	public void takeOrder(Order order) {
 		try {
-			System.out.printf("Waiter: Taking next order...(from client: %s)%n", order.getClient());
+			System.out.printf("Waiter: Taking next order...(from: %s)%n", order.getClient());
 			Thread.sleep(orderTakingSpeed);
 		} catch (InterruptedException e) {}
 		orderQueue.addOrder(order);
@@ -44,7 +44,7 @@ public class Waiter implements Observer {
 		while (!deliveryQueue.isEmpty()) {
 			isBusy = true;
 			ReadyMeal meal = deliveryQueue.getNextMeal();
-			System.out.printf("Waiter: Delivering order... (for client: %s)%n", meal.getClient());
+			System.out.printf("Waiter: Delivering order... (for: %s)%n", meal.getClient());
 			Thread.sleep(deliverySpeed);
 			Client client = meal.getClient();
 			client.consumeFood(meal.getReadyFood());

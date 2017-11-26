@@ -86,7 +86,7 @@ public class ClientTest {
 	}
 	
 	@Test
-	public void testMultipleClient() {
+	public void testMultipleClients() {
 		Client client1 = new Client(waiter);
 		Client client2 = new Client(waiter);
 		Client client3 = new Client(waiter);

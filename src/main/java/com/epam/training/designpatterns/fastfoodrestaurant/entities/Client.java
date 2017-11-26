@@ -26,7 +26,7 @@ public class Client {
 	
 	public void consumeFood(Food food) {
 		happiness = food.applyEffect(happiness);
-		System.out.printf("%s: Eating food: %s. New happiness score: %d%n", this, food, happiness);
+		System.out.printf("%s: Eating food: %s. New happiness percentage: %d%%%n", this, food, happiness);
 	}
 	
 	public int getHappiness() {

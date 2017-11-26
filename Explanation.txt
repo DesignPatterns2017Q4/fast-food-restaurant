@@ -7,17 +7,23 @@ egy alapétel választása kötelező, de azon felül annak megválasztása, hog
 megadható a pincér által, hogy az adott rendelés mennyire sürgős (priority vagy sem).
 
 
-2. Decorator (Condiments/Food)
+2. Decorator (Condiments/Food interface-ek)
 Az egyes kiegészítők decorator-ként wrappelik az alapételeket, és megváltozatják a hatásukat.
 A dekorátor pattern segítségével jól láncba lehet helyezeni őket, és akár több kiegészítőt is rá lehet aggatni
 egy alapételre.
 
 
-3. Observer (Waiter -> DeliveryQueue, és Chef -> OrderQueue)
+3. Observer (Waiter -> DeliveryQueue, és Chef -> OrderQueue class-ok)
 Két különbőző observer-observable kapcsolat van: egyrészt a Waiter fel van iratkozva a DeliveryQueue-ra,
 amiben a kész ételek (ReadyMeal-ek) sorakoznak, és arra várnak, hogy kivigyék az ügyfeleknek.
 A másik esetben a Chef van felirakozva az OrderQueue-ra, amiben pedig az elkészítésre várakozó rendelések
 sorakoznak, amiket a Chef-nek meg kellene főznie.
 Az observer pattern segítségével mind a Waiter, mind a Chef egyből értesülni tud róla, hogy 
 ha újabb elem érkezett, amit így minél gyorsabban feldolgozhatnak,és a Queue-t se kell folyamatosan figyelniük.
+
+
+4. Strategy (CookingStrategy interface)
+Az Order részeként megadható opcionálisan az elkészítés stílusa (amerikai, japán konyha...) 
+A Chef osztálynak ez a cookign stílus aztán egy dinamikusan változtatható stratégiája lesz,
+melynek segítségével különböző módszerekkel készítheti el a séf ugyanazokat a rendeléseket, igény szerint.
 

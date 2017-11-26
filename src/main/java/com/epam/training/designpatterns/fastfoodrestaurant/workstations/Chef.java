@@ -9,11 +9,14 @@ import com.epam.training.designpatterns.fastfoodrestaurant.entities.Order;
 import com.epam.training.designpatterns.fastfoodrestaurant.entities.ReadyMeal;
 import com.epam.training.designpatterns.fastfoodrestaurant.food.Condiment;
 import com.epam.training.designpatterns.fastfoodrestaurant.food.Food;
+import com.epam.training.designpatterns.fastfoodrestaurant.strategies.CookingStrategy;
+import com.epam.training.designpatterns.fastfoodrestaurant.strategies.DefaultCookingStrategy;
 
 public class Chef implements Observer {
 	
 	private OrderQueue orderQueue;
 	private DeliveryQueue deliveryQueue;
+	private CookingStrategy cookingStrategy = new DefaultCookingStrategy();
 	private boolean isBusy;
 	private int cookingSpeed = 1000;
 
@@ -21,6 +24,11 @@ public class Chef implements Observer {
 		this.orderQueue = orderQueue;
 		this.deliveryQueue = deliveryQueue;
 		orderQueue.addObserver(this);
+	}
+	
+	public Chef(OrderQueue orderQueue, DeliveryQueue deliveryQueue, CookingStrategy cookingStrategy) {
+		this(orderQueue, deliveryQueue);
+		this.cookingStrategy = cookingStrategy;
 	}
 
 	@Override
@@ -37,7 +45,7 @@ public class Chef implements Observer {
 			isBusy = true;
 			Order order = orderQueue.getNextOrder();
 			Client client = order.getClient();
-			Food food = buildFood(order);
+			Food food = prepareFood(order);
 			
 			ReadyMeal meal = new ReadyMeal(food, client);
 			deliveryQueue.addFinishedMeal(meal);
@@ -45,16 +53,17 @@ public class Chef implements Observer {
 		isBusy = false;
 	}
 
-	private Food buildFood(Order order) throws InterruptedException {
+	private Food prepareFood(Order order) throws InterruptedException {
 		
 		Food baseFood = order.getFood();
 		List<Condiment> condiments = order.getCondiments();
 		boolean isPriority = order.isPriority();
+		CookingStrategy cookingStrategy = order.getCookingStyle();
 		
 		int preparationTime = isPriority ? cookingSpeed : cookingSpeed + 1000;
 		
-		System.out.printf("Chef: Preparing next meal (for client: %s, priority: %s)%n"
-				, order.getClient(), order.isPriority());
+		System.out.printf("Chef: Preparing next meal (for: %s, priority: %s)%n", order.getClient(), isPriority);
+		
 		Thread.sleep(preparationTime);
 		
 		Food finishedMeal = baseFood;
@@ -63,12 +72,19 @@ public class Chef implements Observer {
 			finishedMeal = (Food) condiment;
 		}
 		
+		setCookingStrategy(cookingStrategy);
+		cookingStrategy.prepare(finishedMeal);
+		setCookingStrategy(new DefaultCookingStrategy());
+		
 		return finishedMeal;
 	}
 	
 	public void setCookingSpeed(int cookingSpeed) {
 		this.cookingSpeed = cookingSpeed;
 	}
-
+	
+	public void setCookingStrategy(CookingStrategy cookingStrategy) {
+		this.cookingStrategy = cookingStrategy;
+	}
 
 }
