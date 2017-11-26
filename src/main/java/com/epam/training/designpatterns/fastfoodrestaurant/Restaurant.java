@@ -17,7 +17,6 @@ import com.epam.training.designpatterns.fastfoodrestaurant.workstations.Waiter;
 
 public class Restaurant {
 
-	private static final int MAX_TIME_TO_SPAWN_NEW_CLIENT = 5000;
 	public static final Random random = new Random();
 	
 	private OrderQueue orderQueue = new OrderQueue();
@@ -26,11 +25,11 @@ public class Restaurant {
 	private Waiter waiter = new Waiter(orderQueue, deliveryQueue);
 	
 	
-	public void startSimulation(int maxNumberOfClients) throws InterruptedException {
+	public void startSimulation(int maxNumberOfClients, int maxSpawnTime) throws InterruptedException {
 		int clientSoFar = 0;
 		while (maxNumberOfClients > clientSoFar) {
 			new Thread(new SimulatedClient()).start();
-			Thread.sleep(1000 + random.nextInt(MAX_TIME_TO_SPAWN_NEW_CLIENT));
+			Thread.sleep(random.nextInt(maxSpawnTime));
 			clientSoFar++;
 		}
 	}
@@ -59,7 +58,7 @@ public class Restaurant {
 	public static void main(String[] args) throws InterruptedException {
 		
 		Restaurant restaurant = new Restaurant();
-		restaurant.startSimulation(10);
+		restaurant.startSimulation(10, 2000);
 
 	}
 
