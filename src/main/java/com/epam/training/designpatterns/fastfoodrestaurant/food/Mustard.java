@@ -2,12 +2,6 @@ package com.epam.training.designpatterns.fastfoodrestaurant.food;
 
 public class Mustard extends Condiment implements Food {
 
-	public Mustard(Food baseFood) {
-		super(baseFood);
-	}
-	
-	public Mustard() { }
-
 	@Override
 	public int applyEffect(int happiness) {
 		if (baseFood != null) {

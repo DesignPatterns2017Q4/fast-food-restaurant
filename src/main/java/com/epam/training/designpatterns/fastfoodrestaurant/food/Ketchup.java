@@ -3,12 +3,6 @@ package com.epam.training.designpatterns.fastfoodrestaurant.food;
 
 public class Ketchup extends Condiment implements Food {
 	
-	public Ketchup(Food baseFood) {
-		super(baseFood);
-	}
-	
-	public Ketchup() {}
-	
 	@Override
 	public int applyEffect(int happiness) {
 		if (baseFood != null) {

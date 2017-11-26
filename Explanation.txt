@@ -1,0 +1,20 @@
+Az alábbi pattern-eket alkalmaztam a megoldásomban:
+
+1. Builder (OrderBuilder class)
+Ennek szükségességét az adta, hogy egy rendelés különbözőképpen alkotható meg:
+egy alapétel választása kötelező, de azon felül annak megválasztása, hogy hány kiegészítőt
+(ketchup, ...) kér az ügyfél az már rajta múlik (akár egyet se), ugyanígy az is opcionálisan
+megadható a pincér által, hogy az adott rendelés mennyire sürgős (priority vagy sem).
+
+
+2. Decorator (Condiments/Food)
+Az egyes kiegészítők decorator-ként wrappelik az alapételeket, és megváltozatják a hatásukat.
+A dekorátor pattern segítségével jól láncba lehet helyezeni őket, és akár több kiegészítőt is rá lehet aggatni
+egy alapételre.
+
+
+3. Observer (Waiter -> DeliveryQueue, és Chef -> OrderQueue)
+A Waiter és a Chef egy-egy szálvédett FIFO-ból veszik ki a hozzájuk tartozó objektumokat.
+Az observer pattern segítségével egyből értesülni tudnak róla, hogy újabb elem érkezett, amit 
+így minél gyorsabban feldolgozhatnak,és a Queue-t se kell folyamatosan figyelniük.
+
