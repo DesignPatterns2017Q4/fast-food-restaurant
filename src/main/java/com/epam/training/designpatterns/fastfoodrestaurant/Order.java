@@ -26,8 +26,5 @@ public class Order {
 	public List<Extra> getExtras() {
 		return extras;
 	}
-
-	
-	
 	
 }

@@ -11,11 +11,11 @@ public class Client {
 		this.happiness = 0;
 	}
 
-	void sendOrderToServer(Server server) {
-		server.newOrder(order);
+	void initiateOrder(Cashier cashier) throws InterruptedException {
+		cashier.newOrder(order);
 	}
 	
-	public void receive(Order order) {
+	public void receiveOrder(Order order) {
 		Product product = order.getProduct();
 		List<Extra> extras = order.getExtras();
 		
@@ -28,8 +28,7 @@ public class Client {
 		System.out.println("I am " + this.happiness + " happy.");
 		
 		for(Extra e : extras) {
-			System.out.print("Consuming ");
-			System.out.println(e);
+			System.out.print("Consuming " + e);
 			System.out.println("I am " + this.happiness + " happy.");
 		}
 	}
