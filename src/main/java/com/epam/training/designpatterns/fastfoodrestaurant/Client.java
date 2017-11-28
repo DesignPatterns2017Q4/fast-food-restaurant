@@ -5,31 +5,30 @@ import java.util.List;
 public class Client {
 	
 	private int happiness;
-	Order order;
+	Cashier cashier;
 	
-	public Client() {
+	public Client(Cashier cashier) {
 		this.happiness = 0;
+		this.cashier = cashier;
 	}
 
-	void initiateOrder(Cashier cashier) throws InterruptedException {
+	public void makeOrder(Order order) {
 		cashier.newOrder(order);
 	}
-	
-	public void receiveOrder(Order order) {
+
+	public void consumeOrder(Order order) {
 		Product product = order.getProduct();
 		List<Extra> extras = order.getExtras();
+		applyExtras(product, extras);
 		
-		consume(product, extras);
+		System.out.println("Consuming " + product.getName());
+		product.consumedBy(this);
+		System.out.println("I am " + this.happiness + " happy");
 	}
 
-	private void consume(Product product, List<Extra> extras) {
-		System.out.println("Consuming " + product);
-		product.consumedBy(this);
-		System.out.println("I am " + this.happiness + " happy.");
-		
+	private void applyExtras(Product product, List<Extra> extras) {
 		for(Extra e : extras) {
-			System.out.print("Consuming " + e);
-			System.out.println("I am " + this.happiness + " happy.");
+			e.modifyEffectOfProduct(product);
 		}
 	}
 

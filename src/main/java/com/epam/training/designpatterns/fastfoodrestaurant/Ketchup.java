@@ -1,10 +1,16 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
 public class Ketchup extends Extra implements ProductModifier {
+	
+	private final String NAME = "ketchup";
 
 	public void modifyEffectOfProduct(Product product) {
-		int productEffect = product.getEffect();
-		product.setEffect(productEffect * 2);
+		product.setEffect(product.getEffect() * 2);
+	}
+
+	@Override
+	public String getName() {
+		return NAME;
 	}
 
 }
