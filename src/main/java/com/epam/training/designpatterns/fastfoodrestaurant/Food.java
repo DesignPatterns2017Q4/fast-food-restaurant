@@ -1,6 +1,5 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
-public class Food {
-
-    
+public interface Food {
+    double effect(double happines);
 }
