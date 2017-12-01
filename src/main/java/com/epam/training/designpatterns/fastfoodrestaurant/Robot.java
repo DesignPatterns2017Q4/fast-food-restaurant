@@ -1,6 +1,8 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
-public class Robot {
+import java.util.Observable;
+
+public class Robot extends Observable {
 	
 	Cashier cashier;
 	
@@ -9,7 +11,8 @@ public class Robot {
 	}
 	
 	public void serveOrder(Order order) {
-		cashier.foodReady(order);
+		setChanged();
+		notifyObservers(order);
 	}
 
 }

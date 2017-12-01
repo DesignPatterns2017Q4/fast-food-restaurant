@@ -13,6 +13,9 @@ public class FastFoodRestaurant {
 		
 		cashier.setRobot(robot);
 		
+		robot.addObserver(cashier);
+		cashier.addObserver(client);
+		
 		List<Extra> extras = new LinkedList<Extra>();
 		extras.add(new Ketchup());
 		extras.add(new Mustard());

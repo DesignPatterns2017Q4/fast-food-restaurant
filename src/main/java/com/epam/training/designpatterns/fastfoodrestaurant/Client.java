@@ -1,8 +1,10 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Client {
+public class Client implements Observer {
 	
 	private int happiness;
 	Cashier cashier;
@@ -21,9 +23,18 @@ public class Client {
 		List<Extra> extras = order.getExtras();
 		applyExtras(product, extras);
 		
-		System.out.println("Consuming " + product.getName());
+		System.out.print("Consuming " + product.getName() + " ");
+		
+		if(!extras.isEmpty()) {
+			System.out.print("with extras: ");
+			for(Extra e : extras) {
+				System.out.print(e.getName() + " ");
+			}
+		}
+		System.out.println();
+		
 		product.consumedBy(this);
-		System.out.println("I am " + this.happiness + " happy");
+		System.out.println("I am " + this.happiness + " happy.");
 	}
 
 	private void applyExtras(Product product, List<Extra> extras) {
@@ -38,6 +49,10 @@ public class Client {
 
 	public void setHappiness(int happiness) {
 		this.happiness = happiness;
+	}
+
+	public void update(Observable o, Object arg) {
+		consumeOrder((Order)arg);
 	}
 	
 }
