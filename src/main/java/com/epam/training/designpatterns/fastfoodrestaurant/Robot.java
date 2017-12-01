@@ -7,7 +7,7 @@ public class Robot extends Observable {
 	Cashier cashier;
 	OrderQueue orderQueue;
 	
-	public Robot(Cashier cashier) {
+	public void setCashier(Cashier cashier) {
 		this.cashier = cashier;
 	}
 	

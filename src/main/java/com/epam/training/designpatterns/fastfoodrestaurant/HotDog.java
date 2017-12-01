@@ -2,12 +2,12 @@ package com.epam.training.designpatterns.fastfoodrestaurant;
 
 public class HotDog extends Product implements Consumable {
 	
-	private int effect = 2;
+	private double effect = 2.0;
 	private final String NAME = "hotdog";
 
 	@Override
 	public void consumedBy(Client client) {
-		int clientHappiness = client.getHappiness();
+		double clientHappiness = client.getHappiness();
 		client.setHappiness(clientHappiness + effect);
 	}
 
@@ -17,12 +17,12 @@ public class HotDog extends Product implements Consumable {
 	}
 
 	@Override
-	public int getEffect() {
+	public double getEffect() {
 		return effect;
 	}
 
 	@Override
-	public void setEffect(int effect) {
+	public void setEffect(double effect) {
 		this.effect = effect;
 	}
 

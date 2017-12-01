@@ -5,7 +5,7 @@ public class Ketchup extends Extra implements ProductModifier {
 	private final String NAME = "ketchup";
 
 	public void modifyEffectOfProduct(Product product) {
-		product.setEffect(product.getEffect() * 2);
+		product.setEffect(product.getEffect() * 2.0);
 	}
 
 	@Override

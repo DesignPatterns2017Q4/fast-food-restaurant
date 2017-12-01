@@ -6,11 +6,20 @@ import java.util.Observer;
 
 public class Client implements Observer {
 	
-	private int happiness;
+	private String name;
+	private double happiness;
 	Cashier cashier;
 	
-	public Client(Cashier cashier) {
-		this.happiness = 0;
+	public Client(String name) {
+		this.happiness = 1.0;
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setCashier(Cashier cashier) {
 		this.cashier = cashier;
 	}
 
@@ -23,6 +32,7 @@ public class Client implements Observer {
 		List<Extra> extras = order.getExtras();
 		applyExtras(product, extras);
 		
+		System.out.print(this.name + ": ");
 		System.out.print("Consuming " + product.getName() + " ");
 		
 		if(!extras.isEmpty()) {
@@ -36,6 +46,10 @@ public class Client implements Observer {
 		product.consumedBy(this);
 		System.out.println("I am " + this.happiness + " happy.");
 	}
+	
+	public boolean isMyOrder(Order order) {
+		return order.getClient().getName().equals(this.name);
+	}
 
 	private void applyExtras(Product product, List<Extra> extras) {
 		for(Extra e : extras) {
@@ -43,16 +57,18 @@ public class Client implements Observer {
 		}
 	}
 
-	public int getHappiness() {
+	public double getHappiness() {
 		return happiness;
 	}
 
-	public void setHappiness(int happiness) {
-		this.happiness = happiness;
+	public void setHappiness(double d) {
+		this.happiness = d;
 	}
 
 	public void update(Observable o, Object arg) {
-		consumeOrder((Order)arg);
+		if(isMyOrder((Order)arg)) {
+			consumeOrder((Order)arg);
+		}
 	}
 	
 }
