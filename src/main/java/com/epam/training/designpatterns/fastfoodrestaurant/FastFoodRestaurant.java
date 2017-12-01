@@ -10,8 +10,11 @@ public class FastFoodRestaurant {
 		Cashier cashier = new Cashier();
 		Robot robot = new Robot(cashier);
 		Client client = new Client(cashier);
+		OrderQueue orderQueue = new OrderQueue();
 		
 		cashier.setRobot(robot);
+		cashier.setOrderQueue(orderQueue);
+		robot.setOrderQueue(orderQueue);
 		
 		robot.addObserver(cashier);
 		cashier.addObserver(client);
