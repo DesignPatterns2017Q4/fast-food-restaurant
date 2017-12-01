@@ -1,13 +1,14 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
 import java.util.Observable;
+import java.util.Queue;
 import java.util.Random;
 
 public class Robot extends Observable implements Runnable {
 	
 	Cashier cashier;
-	OrderQueue newOrderQueue;
-	OrderQueue readyOrderQueue;
+	Queue<Order> newOrderQueue;
+	Queue<Order> readyOrderQueue;
 	Random random;
 	
 	public Robot() {
@@ -18,11 +19,11 @@ public class Robot extends Observable implements Runnable {
 		this.cashier = cashier;
 	}
 	
-	public void setNewOrderQueue(OrderQueue newOrderQueue) {
+	public void setNewOrderQueue(Queue<Order> newOrderQueue) {
 		this.newOrderQueue = newOrderQueue;
 	}
 
-	public void setReadyOrderQueue(OrderQueue readyOrderQueue) {
+	public void setReadyOrderQueue(Queue<Order> readyOrderQueue) {
 		this.readyOrderQueue = readyOrderQueue;
 	}
 	
@@ -37,9 +38,9 @@ public class Robot extends Observable implements Runnable {
 
 	public void run() {
 		while(newOrderQueue.size() > 0) {
-			Order order = newOrderQueue.pop();
+			Order order = newOrderQueue.remove();
 			waitSomeTime();
-			readyOrderQueue.put(order);
+			readyOrderQueue.add(order);
 			setChanged();
 			notifyObservers(order);
 		}

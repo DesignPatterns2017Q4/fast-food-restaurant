@@ -2,6 +2,8 @@ package com.epam.training.designpatterns.fastfoodrestaurant;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class FastFoodRestaurant {
 
@@ -11,8 +13,8 @@ public class FastFoodRestaurant {
 		Robot robot = new Robot();
 		Client firstClient = new Client("first client");
 		Client secondClient = new Client("second client");
-		OrderQueue newOrderQueue = new OrderQueue();
-		OrderQueue readyOrderQueue = new OrderQueue();
+		Queue<Order> newOrderQueue = new ConcurrentLinkedQueue<Order>();
+		Queue<Order> readyOrderQueue = new ConcurrentLinkedQueue<Order>();
 		
 		cashier.setRobot(robot);
 		cashier.setNewOrderQueue(newOrderQueue);
