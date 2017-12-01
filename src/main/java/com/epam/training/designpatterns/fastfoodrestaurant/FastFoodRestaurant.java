@@ -11,15 +11,18 @@ public class FastFoodRestaurant {
 		Robot robot = new Robot();
 		Client firstClient = new Client("first client");
 		Client secondClient = new Client("second client");
-		OrderQueue orderQueue = new OrderQueue();
+		OrderQueue newOrderQueue = new OrderQueue();
+		OrderQueue readyOrderQueue = new OrderQueue();
 		
 		cashier.setRobot(robot);
-		cashier.setOrderQueue(orderQueue);
+		cashier.setNewOrderQueue(newOrderQueue);
+		cashier.setReadyOrderQueue(readyOrderQueue);
 		cashier.addObserver(firstClient);
 		cashier.addObserver(secondClient);
 		
 		robot.setCashier(cashier);
-		robot.setOrderQueue(orderQueue);
+		robot.setNewOrderQueue(newOrderQueue);
+		robot.setReadyOrderQueue(readyOrderQueue);
 		robot.addObserver(cashier);
 		
 		firstClient.setCashier(cashier);
@@ -34,6 +37,9 @@ public class FastFoodRestaurant {
 		
 		Order firstClientOrder = new Order(firstClient, new HotDog(), firstClientExtras);
 		Order secondClientOrder = new Order(secondClient, new Chips(), secondClientExtras);
+		
+		Thread kitchen = new Thread(robot);
+		kitchen.start();
 		
 		firstClient.makeOrder(firstClientOrder);
 		secondClient.makeOrder(secondClientOrder);

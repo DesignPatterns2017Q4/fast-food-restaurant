@@ -6,22 +6,27 @@ import java.util.Observer;
 public class Cashier extends Observable implements Observer {
 
 	Robot robot;
-	OrderQueue orderQueue;
+	OrderQueue newOrderQueue;
+	OrderQueue readyOrderQueue;
 
 	public void setRobot(Robot robot) {
 		this.robot = robot;
 	}
+	
+	public void setNewOrderQueue(OrderQueue newOrderQueue) {
+		this.newOrderQueue = newOrderQueue;
+	}
 
-	public void setOrderQueue(OrderQueue orderQueue) {
-		this.orderQueue = orderQueue;
+	public void setReadyOrderQueue(OrderQueue readyOrderQueue) {
+		this.readyOrderQueue = readyOrderQueue;
 	}
 
 	public void newOrder(Order order) {
-		robot.serveOrder(order);
+		newOrderQueue.put(order);
 	}
 
 	public void update(Observable o, Object arg) {
-		Order order = orderQueue.pop();
+		Order order = readyOrderQueue.pop();
 		setChanged();
 		notifyObservers(order);
 	}

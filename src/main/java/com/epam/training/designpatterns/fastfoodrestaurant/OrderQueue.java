@@ -17,5 +17,9 @@ public class OrderQueue implements Fifo<Order> {
 	public void put(Order order) {
 		orders.addLast(order);
 	}
+	
+	public int size() {
+		return orders.size();
+	}
 
 }
