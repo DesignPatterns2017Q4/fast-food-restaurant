@@ -3,7 +3,6 @@ package com.epam.training.designpatterns.fastfoodrestaurant;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Cashier extends Observable implements Observer {
 
@@ -24,7 +23,7 @@ public class Cashier extends Observable implements Observer {
 	}
 
 	public void newOrder(Order order) {
-		newOrderQueue.offer(order);
+		newOrderQueue.add(order);
 	}
 
 	public void update(Observable o, Object arg) {

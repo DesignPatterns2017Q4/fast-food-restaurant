@@ -13,6 +13,7 @@ public class FastFoodRestaurant {
 		Robot robot = new Robot();
 		Client firstClient = new Client("first client");
 		Client secondClient = new Client("second client");
+		Client thirdClient = new Client("third client");
 		Queue<Order> newOrderQueue = new ConcurrentLinkedQueue<Order>();
 		Queue<Order> readyOrderQueue = new ConcurrentLinkedQueue<Order>();
 		
@@ -21,6 +22,7 @@ public class FastFoodRestaurant {
 		cashier.setReadyOrderQueue(readyOrderQueue);
 		cashier.addObserver(firstClient);
 		cashier.addObserver(secondClient);
+		cashier.addObserver(thirdClient);
 		
 		robot.setCashier(cashier);
 		robot.setNewOrderQueue(newOrderQueue);
@@ -29,6 +31,7 @@ public class FastFoodRestaurant {
 		
 		firstClient.setCashier(cashier);
 		secondClient.setCashier(cashier);
+		thirdClient.setCashier(cashier);
 		
 		List<Extra> firstClientExtras = new LinkedList<Extra>();
 		firstClientExtras.add(new Ketchup());
@@ -37,14 +40,20 @@ public class FastFoodRestaurant {
 		List<Extra> secondClientExtras = new LinkedList<Extra>();
 		secondClientExtras.add(new Ketchup());
 		
+		List<Extra> thirdClientExtras = new LinkedList<Extra>();
+		thirdClientExtras.add(new Ketchup());
+		
 		Order firstClientOrder = new Order(firstClient, new HotDog(), firstClientExtras);
 		Order secondClientOrder = new Order(secondClient, new Chips(), secondClientExtras);
-		
+		Order thirdClientOrder = new Order(thirdClient, new HotDog(), thirdClientExtras);
+
 		Thread kitchen = new Thread(robot);
 		kitchen.start();
 		
 		firstClient.makeOrder(firstClientOrder);
 		secondClient.makeOrder(secondClientOrder);
+		thirdClient.makeOrder(thirdClientOrder);
+
 	}
 
 }
