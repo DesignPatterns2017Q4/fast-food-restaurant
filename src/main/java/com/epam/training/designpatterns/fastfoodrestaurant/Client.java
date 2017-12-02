@@ -31,10 +31,14 @@ public class Client implements Observer {
 		Product product = order.getProduct();
 		List<Extra> extras = order.getExtras();
 		applyExtras(product, extras);
-		
+		printEating(product, extras);
+		product.consumedBy(this);
+		System.out.println("I am " + this.happiness + " happy.");
+	}
+
+	private void printEating(Product product, List<Extra> extras) {
 		System.out.print(this.name + ": ");
 		System.out.print("Consuming " + product.getName() + " ");
-		
 		if(!extras.isEmpty()) {
 			System.out.print("with extras: ");
 			for(Extra e : extras) {
@@ -42,9 +46,6 @@ public class Client implements Observer {
 			}
 		}
 		System.out.println();
-		
-		product.consumedBy(this);
-		System.out.println("I am " + this.happiness + " happy.");
 	}
 	
 	public boolean isMyOrder(Order order) {
