@@ -2,6 +2,9 @@ package com.epam.training.designpatterns.fastfoodrestaurant;
 
 import java.util.Queue;
 
+import com.epam.training.designpatterns.fastfoodrestaurant.Menu.ExtraType;
+import com.epam.training.designpatterns.fastfoodrestaurant.Menu.FoodType;
+
 public class Chef {
     private Queue<Order> orders;
     private Food food;
@@ -14,23 +17,40 @@ public class Chef {
     public void makeFood() {
         Order order = orders.remove();
         
+        FoodBuilder foodBuilder = new FoodBuilder();
+        foodBuilder.addFood(order.getFood());
+        foodBuilder.addExtra(order.getExtra());
+        food = foodBuilder.makeFood();
         
-        if (order.getFood() ==  Menu.FoodType.Hotdog ) {
-            food = new Hotdog();
-        } else {
-            food = new Chips();
-        }
-
-
-        if(order.getExtra() == Menu.ExtraType.Ketchup) {
-            food = new Ketchup(food);
-        } else {
-            food = new Mustard(food);
-        }
         order.setDone();
     }
 
     public Food getFood() {
         return food;
+    }
+
+    private class FoodBuilder {
+        private Food food;
+
+        public void addFood(FoodType foodType) {
+            if (foodType ==  FoodType.Hotdog ) {
+                food = new Hotdog();
+            } else {
+                food = new Chips();
+            }
+    
+        }
+
+        public void addExtra(ExtraType extraType) {
+            if(extraType == ExtraType.Ketchup) {
+                food = new Ketchup(food);
+            } else {
+                food = new Mustard(food);
+            }
+        }
+
+        public Food makeFood() {
+            return food;
+        }
     }
 }
