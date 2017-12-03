@@ -17,8 +17,7 @@ public class Chef {
     public void makeFood() {
         Order order = orders.remove();
         
-        FoodBuilder foodBuilder = new FoodBuilder();
-        foodBuilder.addFood(order.getFood());
+        FoodBuilder foodBuilder = new FoodBuilder(order.getFood());
         foodBuilder.addExtra(order.getExtra());
         food = foodBuilder.makeFood();
         
@@ -32,13 +31,12 @@ public class Chef {
     private class FoodBuilder {
         private Food food;
 
-        public void addFood(FoodType foodType) {
+        public FoodBuilder(FoodType foodType) {
             if (foodType ==  FoodType.Hotdog ) {
                 food = new Hotdog();
             } else {
                 food = new Chips();
             }
-    
         }
 
         public void addExtra(ExtraType extraType) {
