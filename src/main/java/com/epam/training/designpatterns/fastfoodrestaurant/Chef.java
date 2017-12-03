@@ -1,22 +1,36 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
+import java.util.Queue;
+
 public class Chef {
-    public Food makeFood(Order order) {
-        Food resultFood;
+    private Queue<Order> orders;
+    private Food food;
+
+
+    public Chef(Queue<Order> orders) {
+        this.orders = orders;
+    }
+
+    public void makeFood() {
+        Order order = orders.remove();
+        
         
         if (order.getFood() ==  Menu.FoodType.Hotdog ) {
-            resultFood = new Hotdog();
+            food = new Hotdog();
         } else {
-            resultFood = new Chips();
+            food = new Chips();
         }
 
 
         if(order.getExtra() == Menu.ExtraType.Ketchup) {
-            resultFood = new Ketchup(resultFood);
+            food = new Ketchup(food);
         } else {
-            resultFood = new Mustard(resultFood);
+            food = new Mustard(food);
         }
+        order.setDone();
+    }
 
-        return resultFood;
+    public Food getFood() {
+        return food;
     }
 }

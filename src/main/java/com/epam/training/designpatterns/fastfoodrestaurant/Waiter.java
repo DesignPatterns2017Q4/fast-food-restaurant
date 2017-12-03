@@ -1,19 +1,21 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
+import java.util.Queue;
+
 public class Waiter{
     private Chef chef;
-    private Food food;
+    private Queue<Order> orders;
 
-    public Waiter(Chef chef) {
+    public Waiter(Chef chef, Queue<Order> orders) {
         this.chef = chef;
-    }
-
-    public void giveOrderToChef(Order order) {
-        food = chef.makeFood(order);
-        order.setDone();
+        this.orders = orders;
     }
 
     public Food getFood() {
-        return food;
+        return chef.getFood();
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
     }
 }
