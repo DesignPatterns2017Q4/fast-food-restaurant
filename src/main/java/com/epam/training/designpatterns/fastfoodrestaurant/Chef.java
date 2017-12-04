@@ -16,12 +16,15 @@ public class Chef {
 
     public void makeFood() {
         Order order = orders.remove();
+        System.out.println("Chef: Getting order from queue.");
         
         FoodBuilder foodBuilder = new FoodBuilder(order.getFood());
         foodBuilder.addExtra(order.getExtra());
         food = foodBuilder.makeFood();
-        
-        order.setDone();
+        System.out.println("Chef: I made the food on my secret food making machine.");
+
+        System.out.println("Chef: The order is done.");
+        order.setDone();        
     }
 
     public Food getFood() {

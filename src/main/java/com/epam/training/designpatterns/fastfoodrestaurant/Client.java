@@ -16,15 +16,18 @@ public class Client implements Observer{
     }
 
     public Order makeOrder() {
+        System.out.println("Client: I want a " + food + " with " + extra);
         return new Order(this, food, extra);
     }
 
     public double eatFood(Food food) {
+        System.out.println("Client: I'm eating.");
         return food.effect(happines);
     }
 
     public void update(Observable o, Object arg) {
+        System.out.println("Client: My food is ready! I will get my food form my waiter.");
         Food food = waiter.getFood();
-        System.out.println("Client happines: " + eatFood(food));
+        System.out.println("Client: My happines is " + eatFood(food));
     }
 }
