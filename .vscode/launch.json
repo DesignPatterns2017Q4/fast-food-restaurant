@@ -9,7 +9,7 @@
             "name": "Debug (Launch)-Main<fastfoodrestaurant>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "com.epam.training.designpatterns.fastfoodrestaurant.Main",
+            "mainClass": "com.epam.training.designpatterns.fastfoodrestaurant.Application",
             "projectName": "fastfoodrestaurant",
             "args": ""
         },
