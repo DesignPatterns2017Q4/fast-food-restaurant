@@ -46,10 +46,11 @@ public class Client implements Runnable{
     }
 
     private void eatAndLeave() throws InterruptedException {
+        System.out.println(String.format("%s is eating his %s", toString(), food.toString()));
         setHappiness();
         Thread.sleep(10 * SIMULATION_SPEED);
-        System.out.println(String.format("%s has finished eating his %s and is leaving. Final happiness: %.2f",
-                this.toString(), food.toString(), happiness));
+        System.out.println(String.format("%s has finished eating his and is leaving. Final happiness: %.2f",
+                this.toString(), happiness));
         sema.release();
     }
 
