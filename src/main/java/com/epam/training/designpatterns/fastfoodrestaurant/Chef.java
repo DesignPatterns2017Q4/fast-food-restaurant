@@ -39,12 +39,13 @@ public class Chef {
             }
         }
 
-        public void addExtra(ExtraType extraType) {
+        public FoodBuilder addExtra(ExtraType extraType) {
             if(extraType == ExtraType.Ketchup) {
                 food = new Ketchup(food);
             } else {
                 food = new Mustard(food);
             }
+            return this;
         }
 
         public Food makeFood() {
