@@ -6,22 +6,28 @@ import java.util.*;
 /**
  * Contains a list of classes that represent the menu.
  * Serves as a builder for these classes.
+ * Singleton, because foods should not be added at runtime
  */
 public class Menu {
-    private static final List<Class<? extends Edible>> foods = new ArrayList<>();
-    private static final List<Class<? extends Condiment>> condiments = new ArrayList<>();
 
-    static {
+    private static final Menu instance = new Menu();
+
+    private final List<Class<? extends Edible>> foods = new ArrayList<>();
+    private final List<Class<? extends Condiment>> condiments = new ArrayList<>();
+
+    private Menu(){
         foods.add(Chips.class);
         foods.add(HotDog.class);
         condiments.add(Ketchup.class);
         condiments.add(Mustard.class);
     }
-
+    public static Menu getInstance(){
+        return instance;
+    }
     /**
      * @return a random edible food with a random number of different condiments
      */
-    public static Food randomFoodAndCondiment() {
+    public Food randomFoodAndCondiment() {
         try {
             Food baseFood = foods.get(Math.abs(new Random().nextInt() % foods.size())).newInstance();
 

@@ -30,7 +30,6 @@ public class Cook implements Runnable {
             Order order = orders.take();
             System.out.println(String.format("Cooking %s ", order.toString()));
             Thread.sleep(15 * SIMULATION_SPEED);
-            order.getFood().prepare();
             Order plate = new Order(order.getClient(), order.getFood());
 
             if (platesReadyToServe.remainingCapacity() == 0) {

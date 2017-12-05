@@ -1,5 +1,6 @@
 package com.epam.training.designpatterns.fastfoodrestaurant.tables;
 
+import com.epam.training.designpatterns.fastfoodrestaurant.Restaurant;
 import com.epam.training.designpatterns.fastfoodrestaurant.foods.Food;
 import com.epam.training.designpatterns.fastfoodrestaurant.foods.Menu;
 import com.epam.training.designpatterns.fastfoodrestaurant.staff.Server;
@@ -12,22 +13,22 @@ import java.util.concurrent.Semaphore;
  */
 public class Client implements Runnable {
     private static int clientCount;
-    private final Semaphore sema;
     private final int clientNumber;
     private final int SIMULATION_SPEED;
     private final Server server;
     private double happiness = 100;
     private Food food;
+    private final Restaurant restaurant;
+    private Menu menu;
 
-    public Client(Server server, Semaphore sema, int simulation_speed) {
+    public Client(Server server, Restaurant restaurant, int simulation_speed) {
         SIMULATION_SPEED = simulation_speed;
         this.clientNumber = clientCount++;
-        this.sema = sema;
+        this.restaurant = restaurant;
         this.server = server;
     }
 
     public void giveFood(Food food) throws InterruptedException {
-        assert food.isPrepared();
         this.food = food;
     }
 
@@ -40,7 +41,7 @@ public class Client implements Runnable {
     public void run() {
         try {
             Thread.currentThread().setName(this.toString());
-            Thread.sleep((Math.abs(new Random().nextInt() % 10) + 1) * SIMULATION_SPEED); //Looking over the menu
+            enterRestaurant();
             orderFood();
             waitForFood();
         } catch (InterruptedException e) {
@@ -49,8 +50,13 @@ public class Client implements Runnable {
 
     }
 
+    private void enterRestaurant() throws InterruptedException {
+        menu = restaurant.enter();
+        Thread.sleep((Math.abs(new Random().nextInt() % 10) + 1) * SIMULATION_SPEED); //Looking over the menu
+    }
+
     private void orderFood() throws InterruptedException {
-        Food food = Menu.randomFoodAndCondiment();
+        Food food = menu.randomFoodAndCondiment();
         System.out.println(String.format("%s ordering %s. Current happiness: %.2f",
                 this.toString(), food.toString(), happiness));
         server.takeOrder(this, food);
@@ -69,10 +75,9 @@ public class Client implements Runnable {
         Thread.sleep(10 * SIMULATION_SPEED);
         System.out.println(String.format("%s has finished eating his and is leaving. Final happiness: %.2f",
                 this.toString(), happiness));
-        sema.release();
+        restaurant.leave();
     }
 
-    private void setHappiness() {
-        happiness = (happiness + food.directHappiness()) * food.modifyHappiness();
+    private void setHappiness() {food.eat(this.happiness);
     }
 }

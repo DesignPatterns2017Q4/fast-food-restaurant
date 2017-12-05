@@ -16,13 +16,10 @@ public interface Food {
     }
 
     /**
-     * Cooks the given food.
+     * @param happiness current happiness of client
+     * @return the new happiness after eating this Food
      */
-    void prepare();
-
-    /**
-     * @return Should return true if food is edible
-     */
-    boolean isPrepared();
-
+    default double eat(double happiness){
+        return  (happiness + directHappiness()) * modifyHappiness();
+    }
 }

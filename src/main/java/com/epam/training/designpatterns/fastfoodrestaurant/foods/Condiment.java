@@ -21,18 +21,6 @@ public abstract class Condiment implements Food {
         return food.modifyHappiness();
     }
 
-
-    @Override
-    public void prepare() {
-        food.prepare();
-    }
-
-    @Override
-    public boolean isPrepared() {
-        return food.isPrepared();
-    }
-
-
     @Override
     public String toString() {
         return food + " and " + this.getClass().getSimpleName();
