@@ -6,11 +6,12 @@ public class Mustard extends Condiment {
     }
 
     @Override
-    public double directHappiness(){
+    public double directHappiness() {
         return 1;
     }
+
     @Override
-    public double modifyHappiness(){
+    public double modifyHappiness() {
         return 1;
     }
 }

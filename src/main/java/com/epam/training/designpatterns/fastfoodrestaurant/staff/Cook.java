@@ -5,14 +5,24 @@ import java.util.concurrent.ArrayBlockingQueue;
 /**
  * Takes orders from the order queue, prepares the food, and puts the cooked food in the ready queue
  */
-public class Cook implements Runnable{
+public class Cook implements Runnable {
+    private final int SIMULATION_SPEED;
     private ArrayBlockingQueue<Order> orders;
     private ArrayBlockingQueue<Order> platesReadyToServe;
-    private final int SIMULATION_SPEED;
-    Cook(ArrayBlockingQueue<Order> orders, ArrayBlockingQueue<Order> platesReadyToServe, int simulation_speed){
+
+    Cook(ArrayBlockingQueue<Order> orders, ArrayBlockingQueue<Order> platesReadyToServe, int simulation_speed) {
         this.orders = orders;
         this.platesReadyToServe = platesReadyToServe;
         SIMULATION_SPEED = simulation_speed;
+    }
+
+    @Override
+    public void run() {
+        try {
+            cookFood();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void cookFood() throws InterruptedException {
@@ -28,15 +38,6 @@ public class Cook implements Runnable{
             }
 
             platesReadyToServe.put(plate);
-        }
-    }
-
-    @Override
-    public void run() {
-        try {
-            cookFood();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 }

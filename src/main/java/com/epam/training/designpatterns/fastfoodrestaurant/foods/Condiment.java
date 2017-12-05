@@ -7,15 +7,17 @@ public abstract class Condiment implements Food {
 
     Food food;
 
-    public Condiment(Food food){
+    public Condiment(Food food) {
         this.food = food;
     }
+
     @Override
-    public double directHappiness(){
+    public double directHappiness() {
         return food.directHappiness();
     }
+
     @Override
-    public double modifyHappiness(){
+    public double modifyHappiness() {
         return food.modifyHappiness();
     }
 

@@ -10,27 +10,20 @@ import java.util.concurrent.Semaphore;
 /**
  * Knows the server, and the menu
  */
-public class Client implements Runnable{
+public class Client implements Runnable {
     private static int clientCount;
     private final Semaphore sema;
-
-    private double happiness = 100;
     private final int clientNumber;
-    private Food food;
     private final int SIMULATION_SPEED;
     private final Server server;
+    private double happiness = 100;
+    private Food food;
 
-    public Client(Server server, Semaphore sema, int simulation_speed){
+    public Client(Server server, Semaphore sema, int simulation_speed) {
         SIMULATION_SPEED = simulation_speed;
         this.clientNumber = clientCount++;
         this.sema = sema;
         this.server = server;
-    }
-    private void orderFood() throws InterruptedException {
-        Food food = Menu.randomFoodAndCondiment();
-        System.out.println(String.format("%s ordering %s. Current happiness: %.2f",
-                this.toString(), food.toString(), happiness));
-        server.takeOrder(this, food);
     }
 
     public void giveFood(Food food) throws InterruptedException {
@@ -38,8 +31,33 @@ public class Client implements Runnable{
         this.food = food;
     }
 
+    @Override
+    public String toString() {
+        return "Client #" + clientNumber;
+    }
+
+    @Override
+    public void run() {
+        try {
+            Thread.currentThread().setName(this.toString());
+            Thread.sleep((Math.abs(new Random().nextInt() % 10) + 1) * SIMULATION_SPEED); //Looking over the menu
+            orderFood();
+            waitForFood();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void orderFood() throws InterruptedException {
+        Food food = Menu.randomFoodAndCondiment();
+        System.out.println(String.format("%s ordering %s. Current happiness: %.2f",
+                this.toString(), food.toString(), happiness));
+        server.takeOrder(this, food);
+    }
+
     private synchronized void waitForFood() throws InterruptedException {
-        while (food == null){
+        while (food == null) {
             wait();
         }
         eatAndLeave();
@@ -56,24 +74,5 @@ public class Client implements Runnable{
 
     private void setHappiness() {
         happiness = (happiness + food.directHappiness()) * food.modifyHappiness();
-    }
-
-
-    @Override
-    public String toString(){
-        return "Client #" + clientNumber;
-    }
-
-    @Override
-    public void run() {
-        try {
-            Thread.currentThread().setName(this.toString());
-            Thread.sleep((Math.abs(new Random().nextInt() % 10) + 1) * SIMULATION_SPEED); //Looking over the menu
-            orderFood();
-            waitForFood();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
     }
 }

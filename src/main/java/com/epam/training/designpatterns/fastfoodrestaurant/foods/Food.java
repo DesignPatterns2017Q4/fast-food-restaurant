@@ -4,7 +4,7 @@ public interface Food {
     /**
      * @return the amount this food directly increases (or decreases) client happiness
      */
-    default double directHappiness(){
+    default double directHappiness() {
         return 0;
     }
 
