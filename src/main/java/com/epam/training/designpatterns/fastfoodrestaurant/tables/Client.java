@@ -56,6 +56,7 @@ public class Client implements Runnable {
     }
 
     private void orderFood() throws InterruptedException {
+        //TODO pass list of foods to order
         Food food = menu.randomFoodAndCondiment();
         System.out.println(String.format("%s ordering %s. Current happiness: %.2f",
                 this.toString(), food.toString(), happiness));

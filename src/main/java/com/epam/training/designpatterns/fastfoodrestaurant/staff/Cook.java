@@ -31,7 +31,7 @@ public class Cook implements Runnable {
             System.out.println(String.format("Cooking %s ", order.toString()));
             Thread.sleep(15 * SIMULATION_SPEED);
             Order plate = new Order(order.getClient(), order.getFood());
-
+            //TODO instantiate foods
             if (platesReadyToServe.remainingCapacity() == 0) {
                 System.err.println("Restaurant has run out of plates to serve");
             }
