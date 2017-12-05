@@ -1,6 +1,14 @@
 # fast-food-restaurant
 'Fast Food Restaurant' Homework for the Design Patters 2017 Q4 Course
 
+## Build and run
+
+Buildelés: `mvn clean install`
+
+Futtatás: `java -jar target/fastfoodrestaurant-0.0.1-SNAPSHOT.jar`
+
+Fontos, hogy a pom.xml-ben a következő érték helyes legyen: ` <mainClass>com.epam.training.designpatterns.fastfoodrestaurant.Application</mainClass>`
+
 ## A feladat
 
 Simulate the workflow of a restaurant.
