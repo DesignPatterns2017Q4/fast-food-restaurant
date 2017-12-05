@@ -59,17 +59,17 @@ public class Order {
 			this.food = food;
 		}
 		
-		public OrderBuilder addCondiment(Condiment condiment) {
+		public OrderBuilder withCondiment(Condiment condiment) {
 			condiments.add(condiment);
 			return this;
 		}
 		
-		public OrderBuilder setCookingStyle(CookingStrategy cookingStyle) {
+		public OrderBuilder withCookingStyle(CookingStrategy cookingStyle) {
 			this.cookingStyle = cookingStyle;
 			return this;
 		}
 		
-		public OrderBuilder setPriority(boolean priority) {
+		public OrderBuilder withPriority(boolean priority) {
 			this.priority = priority;
 			return this;
 		}

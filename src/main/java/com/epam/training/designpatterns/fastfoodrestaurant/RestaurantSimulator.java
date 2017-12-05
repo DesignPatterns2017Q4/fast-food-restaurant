@@ -1,6 +1,8 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.epam.training.designpatterns.fastfoodrestaurant.entities.Client;
 import com.epam.training.designpatterns.fastfoodrestaurant.entities.Order;
@@ -18,7 +20,7 @@ import com.epam.training.designpatterns.fastfoodrestaurant.workstations.Delivery
 import com.epam.training.designpatterns.fastfoodrestaurant.workstations.OrderQueue;
 import com.epam.training.designpatterns.fastfoodrestaurant.workstations.Waiter;
 
-public class Restaurant {
+public class RestaurantSimulator {
 
 	public static final Random random = new Random();
 	
@@ -29,17 +31,16 @@ public class Restaurant {
 	
 	
 	public static void main(String[] args) throws InterruptedException {
-		Restaurant restaurant = new Restaurant();
+		RestaurantSimulator restaurant = new RestaurantSimulator();
 		restaurant.startSimulation(20, 4000);
 	}
 	
 	
 	public void startSimulation(int maxNumberOfClients, int maxSpawnTime) throws InterruptedException {
-		int clientsSoFar = 0;
-		while (maxNumberOfClients > clientsSoFar) {
-			new Thread(new SimulatedClient()).start();
-			Thread.sleep(random.nextInt(maxSpawnTime));
-			clientsSoFar++;
+		ExecutorService executor = Executors.newCachedThreadPool();
+		for (int i = 0; i < maxNumberOfClients; ++i) {
+			executor.submit(new SimulatedClient());
+			Thread.sleep(maxSpawnTime);
 		}
 	}
 	
@@ -59,9 +60,9 @@ public class Restaurant {
 			CookingStrategy cookingStyle = random.nextInt(100) > 50 ? 
 					new AmericanStyleCookingStrategy() : new JapaneseStyleCookingStrategy();
 			Order order = new Order.OrderBuilder(client, food)
-					.addCondiment(condiment)
-					.setCookingStyle(cookingStyle)
-					.setPriority(priority)
+					.withCondiment(condiment)
+					.withCookingStyle(cookingStyle)
+					.withPriority(priority)
 					.build();
 			return order;
 		}
