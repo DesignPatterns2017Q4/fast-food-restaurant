@@ -46,7 +46,7 @@ public class Chef implements Observer {
 		}
 	}
 	
-	public void prepareOrders() throws InterruptedException {
+	private void prepareOrders() throws InterruptedException {
 		while (!orderQueue.isEmpty()) {
 			isBusy = true;
 			Order order = orderQueue.getNextOrder();

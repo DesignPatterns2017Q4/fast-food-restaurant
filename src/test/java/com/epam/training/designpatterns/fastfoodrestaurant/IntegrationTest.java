@@ -2,6 +2,7 @@ package com.epam.training.designpatterns.fastfoodrestaurant;
 
 import static org.junit.Assert.assertEquals;
 
+import com.epam.training.designpatterns.fastfoodrestaurant.entities.Restaurant;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,25 +18,17 @@ import com.epam.training.designpatterns.fastfoodrestaurant.workstations.Delivery
 import com.epam.training.designpatterns.fastfoodrestaurant.workstations.OrderQueue;
 import com.epam.training.designpatterns.fastfoodrestaurant.workstations.Waiter;
 
-public class ClientTest {
+import java.io.IOException;
+
+public class IntegrationTest {
 	
-	OrderQueue orderQueue;
-	DeliveryQueue deliveryQueue;
-	Chef chef;
-	Waiter waiter;
+	Restaurant restaurant;
 	Client client;
-	
+
 	@Before
-	public void setUp() {
-		orderQueue = new OrderQueue();
-		deliveryQueue = new DeliveryQueue();
-		chef = new Chef(orderQueue, deliveryQueue);
-		waiter = new Waiter(orderQueue, deliveryQueue);
-		client = new Client(waiter);
-		
-		chef.setCookingSpeed(0);
-		waiter.setOrderTakingSpeed(0);
-		waiter.setDeliverySpeed(0);
+	public void setUp() throws IOException {
+		restaurant = new Restaurant("/restaurant.properties");
+		client = new Client(restaurant.getWaiter());
 	}
 	
 	@Test
@@ -101,10 +94,10 @@ public class ClientTest {
 	@Test
 	public void testMultipleClients() {
 		// GIVEN
-		Client client1 = new Client(waiter);
-		Client client2 = new Client(waiter);
-		Client client3 = new Client(waiter);
-		Client client4 = new Client(waiter);
+		Client client1 = new Client(restaurant.getWaiter());
+		Client client2 = new Client(restaurant.getWaiter());
+		Client client3 = new Client(restaurant.getWaiter());
+		Client client4 = new Client(restaurant.getWaiter());
 		
 		Order hotdogWithKetchupMustard1 = new Order.OrderBuilder(client1, new Hotdog())
 				.withCondiment(Mustard.class)
@@ -142,20 +135,20 @@ public class ClientTest {
 		assertEquals(102, client3.getHappiness());
 		assertEquals(102, client4.getHappiness());
 	}
-	
-	@Ignore
+
 	@Test
 	public void testWithLotsOfOrders() {
 		// GIVEN
+		int numberOfOrders = 1000;
 		Order simpleHotdog = new Order.OrderBuilder(client, new Hotdog())
 				.withPriority(true)
 				.build();
 		// WHEN
-		for (int i = 0; i < 10000; ++i) {
+		for (int i = 0; i < numberOfOrders; ++i) {
 			client.orderFood(simpleHotdog);
 		}
 		// THEN
-		assertEquals(20100, client.getHappiness());
+		assertEquals(100 + 2 * numberOfOrders, client.getHappiness());
 	}
 
 }
