@@ -50,7 +50,7 @@ public class Waiter implements Observer {
 		while (!deliveryQueue.isEmpty()) {
 			isBusy = true;
 			ReadyMeal meal = deliveryQueue.getNextMeal();
-			logger.info("Delivering order... (for: {})", meal.getClient());
+			//logger.info("Delivering order... (for: {})", meal.getClient());
 			Thread.sleep(random.nextInt(deliverySpeed));
 			Client client = meal.getClient();
 			client.consumeFood(meal.getReadyFood());
