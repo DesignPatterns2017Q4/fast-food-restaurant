@@ -15,10 +15,6 @@ import org.springframework.core.env.Environment;
 @PropertySource("/restaurant.properties")
 public class AppConfig {
 
-    private static final int DEFAULT_ORDER_TAKING_SPEED = 9000;
-    private static final int DEFAULT_DELIVERY_SPEED = 7000;
-    private static final int DEFAULT_COOKING_SPEED = 7000;
-
     @Autowired
     Environment environment;
 
