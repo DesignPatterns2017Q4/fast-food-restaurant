@@ -14,7 +14,7 @@ import java.util.Properties;
 
 public class Restaurant {
 
-    private static final int DEFAULT_SPEED = 3000;
+    private static final int DEFAULT_SPEED = 11000;
     private static final String DEFAULT_PROPERTIES_FILE = "/restaurant.properties";
     private static final Logger logger = LoggerFactory.getLogger("Restaurant");
     private Properties config;

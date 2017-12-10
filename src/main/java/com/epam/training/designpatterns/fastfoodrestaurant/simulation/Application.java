@@ -1,5 +1,6 @@
-package com.epam.training.designpatterns.fastfoodrestaurant.config;
+package com.epam.training.designpatterns.fastfoodrestaurant.simulation;
 
+import com.epam.training.designpatterns.fastfoodrestaurant.config.AppConfig;
 import com.epam.training.designpatterns.fastfoodrestaurant.simulation.RestaurantSimulator;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

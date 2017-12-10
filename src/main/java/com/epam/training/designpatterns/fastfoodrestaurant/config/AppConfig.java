@@ -12,7 +12,9 @@ import org.springframework.context.annotation.*;
 @Configuration
 public class AppConfig {
 
-    public static final int DEFAULT_SPEED = 8000;
+    private static final int DEFAULT_ORDER_TAKING_SPEED = 9000;
+    private static final int DEFAULT_DELIVERY_SPEED = 7000;
+    private static final int DEFAULT_COOKING_SPEED = 7000;
 
     @Bean
     OrderQueue orderQueue() {
@@ -27,15 +29,15 @@ public class AppConfig {
     @Bean
     Waiter waiter() {
         Waiter waiter = new Waiter(orderQueue(), deliveryQueue());
-        waiter.setOrderTakingSpeed(DEFAULT_SPEED);
-        waiter.setDeliverySpeed(DEFAULT_SPEED);
+        waiter.setOrderTakingSpeed(DEFAULT_ORDER_TAKING_SPEED);
+        waiter.setDeliverySpeed(DEFAULT_DELIVERY_SPEED);
         return waiter;
     }
 
     @Bean
     Chef chef() {
         Chef chef = new Chef(orderQueue(), deliveryQueue());
-        chef.setCookingSpeed(DEFAULT_SPEED);
+        chef.setCookingSpeed(DEFAULT_COOKING_SPEED);
         return chef;
     }
 
