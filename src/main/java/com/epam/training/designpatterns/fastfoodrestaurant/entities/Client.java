@@ -4,10 +4,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.epam.training.designpatterns.fastfoodrestaurant.food.Food;
 import com.epam.training.designpatterns.fastfoodrestaurant.workstations.Waiter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Client {
 	
 	private static AtomicInteger nextId = new AtomicInteger(1);
+	private static final Logger logger = LoggerFactory.getLogger("Client");
 	
 	private int clientId;
 	private int happiness;
@@ -26,7 +29,7 @@ public class Client {
 	
 	public void consumeFood(Food food) {
 		happiness = food.applyEffect(happiness);
-		System.out.printf("%s: Eating food: %s. New happiness percentage: %d%%%n", this, food, happiness);
+		logger.info("{}: Eating food: {}. New happiness percentage: {}%", this, food, happiness);
 	}
 	
 	public int getHappiness() {

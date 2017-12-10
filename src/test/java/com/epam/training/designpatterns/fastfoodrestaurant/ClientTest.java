@@ -54,7 +54,7 @@ public class ClientTest {
 	public void testFoodWithSingleCondimentEffect() {
 		// GIVEN
 		Order ketchupedChips = new Order.OrderBuilder(client, new Chips())
-				.withCondiment(new Ketchup())
+				.withCondiment(Ketchup.class)
 				.withPriority(true)
 				.build();
 		// WHEN
@@ -67,8 +67,8 @@ public class ClientTest {
 	public void testFoodWithMultipleCondimentEffect() {
 		// GIVEN
 		Order hotdogWithKetchupMustard = new Order.OrderBuilder(client, new Hotdog())
-				.withCondiment(new Mustard())
-				.withCondiment(new Ketchup())
+				.withCondiment(Mustard.class)
+				.withCondiment(Ketchup.class)
 				.withPriority(true)
 				.build();
 		// WHEN
@@ -81,13 +81,13 @@ public class ClientTest {
 	public void testMultipleOrders() {
 		// GIVEN
 		Order hotdogWithKetchupMustard = new Order.OrderBuilder(client, new Hotdog())
-				.withCondiment(new Mustard())
-				.withCondiment(new Ketchup())
+				.withCondiment(Mustard.class)
+				.withCondiment(Ketchup.class)
 				.withPriority(true)
 				.build();
 		
 		Order hotdogWithKetchup = new Order.OrderBuilder(client, new Hotdog())
-				.withCondiment(new Ketchup())
+				.withCondiment(Ketchup.class)
 				.withPriority(true)
 				.build();
 		
@@ -107,26 +107,26 @@ public class ClientTest {
 		Client client4 = new Client(waiter);
 		
 		Order hotdogWithKetchupMustard1 = new Order.OrderBuilder(client1, new Hotdog())
-				.withCondiment(new Mustard())
-				.withCondiment(new Ketchup())
+				.withCondiment(Mustard.class)
+				.withCondiment(Ketchup.class)
 				.withPriority(true)
 				.build();
 		
 		Order hotdogWithKetchupMustard2 = new Order.OrderBuilder(client2, new Hotdog())
-				.withCondiment(new Mustard())
-				.withCondiment(new Ketchup())
+				.withCondiment(Mustard.class)
+				.withCondiment(Ketchup.class)
 				.withPriority(true)
 				.build();
 		
 		Order hotdogWithKetchupMustard3 = new Order.OrderBuilder(client3, new Hotdog())
-				.withCondiment(new Mustard())
-				.withCondiment(new Ketchup())
+				.withCondiment(Mustard.class)
+				.withCondiment(Ketchup.class)
 				.withPriority(true)
 				.build();
 		
 		Order hotdogWithKetchupMustard4 = new Order.OrderBuilder(client4, new Hotdog())
-				.withCondiment(new Mustard())
-				.withCondiment(new Ketchup())
+				.withCondiment(Mustard.class)
+				.withCondiment(Ketchup.class)
 				.withPriority(true)
 				.build();
 		

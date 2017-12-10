@@ -1,6 +1,7 @@
 package com.epam.training.designpatterns.fastfoodrestaurant.entities;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.epam.training.designpatterns.fastfoodrestaurant.food.Condiment;
@@ -13,15 +14,15 @@ public class Order {
 	
 	private Client client;
 	private Food food;
-	private List<Condiment> condiments;
-	CookingStrategy cookingStyle;
+	private List<Class<? extends Condiment>> condiments;
+	private CookingStrategy cookingStyle;
 	private boolean priority;
 	
-	private Order(Food food, Client client, List<Condiment> condiments, boolean priority,
+	private Order(Food food, Client client, List<Class<? extends Condiment>> condiments, boolean priority,
 					CookingStrategy cookingStyle) {
 		this.food = food;
 		this.client = client;
-		this.condiments = new ArrayList<>(condiments);
+		this.condiments = Collections.unmodifiableList(condiments);
 		this.priority = priority;
 		this.cookingStyle = cookingStyle;
 	}
@@ -38,8 +39,8 @@ public class Order {
 		return priority;
 	}
 	
-	public List<Condiment> getCondiments() {
-		return new ArrayList<>(condiments);
+	public List<Class<? extends Condiment>> getCondiments() {
+		return condiments;
 	}
 	
 	public CookingStrategy getCookingStyle() {
@@ -48,18 +49,18 @@ public class Order {
 	
 	public static class OrderBuilder {
 		
-		Client client;
-		Food food;
-		List<Condiment> condiments = new ArrayList<>();
-		CookingStrategy cookingStyle = new DefaultCookingStrategy();
-		boolean priority;
+		private Client client;
+		private Food food;
+		private List<Class<? extends Condiment>> condiments = new ArrayList<>();
+		private CookingStrategy cookingStyle = new DefaultCookingStrategy();
+		private boolean priority;
 		
 		public OrderBuilder(Client client, Food food) {
 			this.client = client;
 			this.food = food;
 		}
 		
-		public OrderBuilder withCondiment(Condiment condiment) {
+		public OrderBuilder withCondiment(Class<? extends Condiment> condiment) {
 			condiments.add(condiment);
 			return this;
 		}
