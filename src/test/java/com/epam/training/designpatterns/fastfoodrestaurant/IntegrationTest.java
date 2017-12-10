@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import com.epam.training.designpatterns.fastfoodrestaurant.entities.Restaurant;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.epam.training.designpatterns.fastfoodrestaurant.entities.Client;
@@ -13,10 +12,6 @@ import com.epam.training.designpatterns.fastfoodrestaurant.food.Chips;
 import com.epam.training.designpatterns.fastfoodrestaurant.food.Hotdog;
 import com.epam.training.designpatterns.fastfoodrestaurant.food.Ketchup;
 import com.epam.training.designpatterns.fastfoodrestaurant.food.Mustard;
-import com.epam.training.designpatterns.fastfoodrestaurant.workstations.Chef;
-import com.epam.training.designpatterns.fastfoodrestaurant.workstations.DeliveryQueue;
-import com.epam.training.designpatterns.fastfoodrestaurant.workstations.OrderQueue;
-import com.epam.training.designpatterns.fastfoodrestaurant.workstations.Waiter;
 
 import java.io.IOException;
 
