@@ -5,7 +5,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class StaffFactory {
     private final int simulation_speed;
     private ArrayBlockingQueue<Order> orders;
-    private ArrayBlockingQueue<Order> platesReadyToServe;
+    private ArrayBlockingQueue<Plate> platesReadyToServe;
 
     public StaffFactory(int maxOrders, int maxPlates, int simulation_speed) {
         this.orders = new ArrayBlockingQueue<>(maxOrders, true);

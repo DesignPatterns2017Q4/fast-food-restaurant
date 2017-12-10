@@ -5,6 +5,7 @@ import com.epam.training.designpatterns.fastfoodrestaurant.foods.Food;
 import com.epam.training.designpatterns.fastfoodrestaurant.foods.Menu;
 import com.epam.training.designpatterns.fastfoodrestaurant.staff.Server;
 
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
@@ -56,8 +57,7 @@ public class Client implements Runnable {
     }
 
     private void orderFood() throws InterruptedException {
-        //TODO pass list of foods to order
-        Food food = menu.randomFoodAndCondiment();
+        List<String> food = menu.randomFoodAndCondiment();
         System.out.println(String.format("%s ordering %s. Current happiness: %.2f",
                 this.toString(), food.toString(), happiness));
         server.takeOrder(this, food);
@@ -79,6 +79,6 @@ public class Client implements Runnable {
         restaurant.leave();
     }
 
-    private void setHappiness() {food.eat(this.happiness);
+    private void setHappiness() {happiness = food.eat(this.happiness);
     }
 }
