@@ -54,7 +54,7 @@ public class WaiterTest {
         // THEN
         verify(deliveryQueue, times(4)).isEmpty();
         verify(deliveryQueue, times(3)).getNextMeal();
-        verify(readyMeal, times(3)).getClient();
+        verify(readyMeal, times(6)).getClient();
         verify(readyMeal, times(3)).getReadyFood();
         verify(client, times(3)).consumeFood(readyMeal.getReadyFood());
     }

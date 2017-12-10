@@ -21,15 +21,12 @@ public class RestaurantSimulator {
 
 	private Restaurant restaurant;
 
-	public static void main(String[] args) throws InterruptedException, IOException {
-		RestaurantSimulator restaurant = new RestaurantSimulator();
-		restaurant.openConfigFile();
-		restaurant.readSimulationValues();
-		restaurant.startSimulation();
+	public RestaurantSimulator(Restaurant restaurant) {
+		this.restaurant = restaurant;
 	}
 
-	private void startSimulation() throws InterruptedException, IOException {
-		restaurant = new Restaurant();
+	public void startSimulation() throws InterruptedException, IOException {
+		configSetup();
 		logIntroduction();
 		ExecutorService executor = Executors.newCachedThreadPool();
 		for (int i = 0; i < maxNumberOfClients; ++i) {
@@ -38,6 +35,10 @@ public class RestaurantSimulator {
 		}
 	}
 
+	private void configSetup() throws IOException {
+		openConfigFile();
+		readSimulationValues();
+	}
 
 	private void openConfigFile() throws IOException {
 		config = new Properties();

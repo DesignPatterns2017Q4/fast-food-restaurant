@@ -5,13 +5,18 @@ import com.epam.training.designpatterns.fastfoodrestaurant.workstations.Chef;
 import com.epam.training.designpatterns.fastfoodrestaurant.workstations.DeliveryQueue;
 import com.epam.training.designpatterns.fastfoodrestaurant.workstations.OrderQueue;
 import com.epam.training.designpatterns.fastfoodrestaurant.workstations.Waiter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 
 public class Restaurant {
 
-    public static final String DEFAULT_PROPERTIES_FILE = "/restaurant.properties";
+    private static final int DEFAULT_SPEED = 3000;
+    private static final String DEFAULT_PROPERTIES_FILE = "/restaurant.properties";
+    private static final Logger logger = LoggerFactory.getLogger("Restaurant");
     private Properties config;
 
     private OrderQueue orderQueue;
@@ -19,15 +24,48 @@ public class Restaurant {
     private Chef chef;
     private Waiter waiter;
 
+    public Restaurant(OrderQueue orderQueue, DeliveryQueue deliveryQueue, Waiter waiter, Chef chef) {
+        Objects.requireNonNull(orderQueue);
+        Objects.requireNonNull(deliveryQueue);
+        Objects.requireNonNull(waiter);
+        Objects.requireNonNull(chef);
+
+        this.orderQueue = orderQueue;
+        this.deliveryQueue = deliveryQueue;
+        this.waiter = waiter;
+        this.chef = chef;
+    }
+
     public Restaurant() throws IOException {
-        openConfigFile(DEFAULT_PROPERTIES_FILE);
-        createWorkStations();
+        this(DEFAULT_PROPERTIES_FILE);
     }
 
     public Restaurant(String propertiesFilePath) throws IOException {
+        this.orderQueue = new OrderQueue();
+        this.deliveryQueue = new DeliveryQueue();
+        this.waiter = new Waiter(orderQueue, deliveryQueue);
+        this.chef = new Chef(orderQueue, deliveryQueue);
+
         openConfigFile(propertiesFilePath);
-        createWorkStations();
+        setSpeedFromConfigOrDefault();
     }
+    private void setSpeedFromConfigOrDefault() {
+        int orderTakingSpeed = DEFAULT_SPEED;
+        int deliverySpeed = DEFAULT_SPEED;
+        int cookingSpeed = DEFAULT_SPEED;
+        try {
+            orderTakingSpeed = Integer.parseInt(config.getProperty("waiter.order_speed"));
+            deliverySpeed = Integer.parseInt(config.getProperty("waiter.delivery_speed"));
+            cookingSpeed = Integer.parseInt(config.getProperty("chef.cooking_speed"));
+        }
+        catch (NumberFormatException e) {
+            logger.error("Error during reading speed config variables: " + e.getMessage());
+        }
+        waiter.setOrderTakingSpeed(orderTakingSpeed);
+        waiter.setDeliverySpeed(deliverySpeed);
+        chef.setCookingSpeed(cookingSpeed);
+    }
+
 
     public Waiter getWaiter() {
         return waiter;
@@ -43,37 +81,6 @@ public class Restaurant {
 
     public int getDeliverySpeed() {
         return waiter.getDeliverySpeed();
-    }
-
-    private void createWorkStations() {
-        orderQueue = createOrderQueue();
-        deliveryQueue = createDeliveryQueue();
-        waiter = createWaiter();
-        chef = createChef();
-    }
-
-    private OrderQueue createOrderQueue() {
-        return new OrderQueue();
-    }
-
-    private DeliveryQueue createDeliveryQueue() {
-        return new DeliveryQueue();
-    }
-
-    private Waiter createWaiter() {
-        Waiter waiter = new Waiter(orderQueue, deliveryQueue);
-        int orderTakingSpeed = Integer.parseInt(config.getProperty("waiter.order_speed"));
-        int deliverySpeed = Integer.parseInt(config.getProperty("waiter.delivery_speed"));
-        waiter.setOrderTakingSpeed(orderTakingSpeed);
-        waiter.setDeliverySpeed(deliverySpeed);
-        return waiter;
-    }
-
-    private Chef createChef() {
-        Chef chef = new Chef(orderQueue, deliveryQueue);
-        int cookingSpeed = Integer.parseInt(config.getProperty("chef.cooking_speed"));
-        chef.setCookingSpeed(cookingSpeed);
-        return chef;
     }
 
     private void openConfigFile(String propFilePath) throws IOException {
