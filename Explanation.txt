@@ -1,0 +1,30 @@
+Az alábbi pattern-eket alkalmaztam a megoldásomban:
+
+1. Builder (OrderBuilder class)
+Ennek szükségességét az adta, hogy egy rendelés különbözőképpen alkotható meg:
+egy alapétel választása kötelező, de azon felül annak megválasztása, hogy hány kiegészítőt
+(ketchup, ...) kér az ügyfél az már rajta múlik (akár egyet se), ugyanígy az is opcionálisan
+megadható a pincér által, hogy az adott rendelés mennyire sürgős (priority vagy sem), illetve milyen
+stílusban készítsék el az ételt.
+
+
+2. Decorator (Condiments/Food interface-ek)
+Az egyes kiegészítők (Kethcup,...) decorator-ként wrappelik az alapételeket, és megváltozatják a hatásukat ezáltal.
+A dekorátor pattern segítségével jól láncba is lehet helyezeni őket, és akár több kiegészítőt is rá lehet aggatni
+ugyanarra az alapételre.
+
+
+3. Observer (Waiter -> DeliveryQueue, és Chef -> OrderQueue class-ok)
+Két különbőző observer-observable kapcsolatot csináltam: egyrészt a Waiter fel van iratkozva a DeliveryQueue-ra,
+amiben a kész ételek (ReadyMeal-ek) sorakoznak, és arra várnak, hogy kivigyék az ügyfeleknek.
+A másik esetben a Chef van felirakozva az OrderQueue-ra, amiben pedig az elkészítésre várakozó rendelések
+sorakoznak, amiket a Chef-nek meg kellene főznie.
+Az observer pattern segítségével mind a Waiter, mind a Chef egyből értesülni tud róla, hogy 
+ha újabb elem érkezett, amit így minél gyorsabban feldolgozhatnak, és a Queue-t se kell folyamatosan figyelniük.
+
+
+4. Strategy (CookingStrategy interface)
+Az Order részeként megadható opcionálisan az elkészítés stílusa (amerikai, japán konyha...) 
+A Chef osztálynak ez a cooking stílus aztán egy dinamikusan változtatható stratégiája lesz,
+melynek segítségével különböző módszerekkel készítheti el a séf ugyanazokat a rendeléseket, igény szerint.
+
