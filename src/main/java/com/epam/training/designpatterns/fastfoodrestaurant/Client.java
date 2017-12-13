@@ -22,7 +22,8 @@ public class Client implements Observer{
 
     public double eatFood(Food food) {
         System.out.println("Client: I'm eating.");
-        return food.effect(happines);
+        happines = food.effect(happines);
+        return happines;
     }
 
     public void update(Observable o, Object arg) {
