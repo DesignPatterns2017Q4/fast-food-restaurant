@@ -1,12 +1,10 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
-import java.util.Queue;
-
 public class Waiter{
     private Chef chef;
-    private Queue<Order> orders;
+    private OrderQueue orders;
 
-    public Waiter(Chef chef, Queue<Order> orders) {
+    public Waiter(Chef chef, OrderQueue orders) {
         this.chef = chef;
         this.orders = orders;
     }
@@ -18,6 +16,6 @@ public class Waiter{
 
     public void addOrder(Order order) {
         System.out.println("Waiter: Adding the order on the queue.");
-        orders.add(order);
+        orders.addOrder(order);
     }
 }

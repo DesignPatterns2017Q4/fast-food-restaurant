@@ -1,21 +1,19 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
-import java.util.Queue;
-
 import com.epam.training.designpatterns.fastfoodrestaurant.Menu.ExtraType;
 import com.epam.training.designpatterns.fastfoodrestaurant.Menu.FoodType;
 
 public class Chef {
-    private Queue<Order> orders;
+    private OrderQueue orders;
     private Food food;
 
 
-    public Chef(Queue<Order> orders) {
+    public Chef(OrderQueue orders) {
         this.orders = orders;
     }
 
     public void makeFood() {
-        Order order = orders.remove();
+        Order order = orders.getOrder();
         System.out.println("Chef: Getting order from queue.");
         
         FoodBuilder foodBuilder = new FoodBuilder(order.getFood());

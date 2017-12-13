@@ -1,13 +1,10 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
-import java.util.Queue;
-import java.util.LinkedList;
-
 public class Application {
 
     public static void main(String[] args) {
 
-        Queue<Order> orders = new LinkedList<Order>();
+        OrderQueue orders = new OrderQueue();
         Chef chef = new Chef(orders);
         Waiter waiter = new Waiter(chef, orders);
         
