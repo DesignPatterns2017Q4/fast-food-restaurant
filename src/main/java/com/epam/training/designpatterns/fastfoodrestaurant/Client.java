@@ -3,13 +3,17 @@ package com.epam.training.designpatterns.fastfoodrestaurant;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.epam.training.designpatterns.fastfoodrestaurant.food.ExtraType;
+import com.epam.training.designpatterns.fastfoodrestaurant.food.Food;
+import com.epam.training.designpatterns.fastfoodrestaurant.food.FoodType;
+
 public class Client implements Observer{
     private double happines = 0.0;
-    private Menu.FoodType food;
-    private Menu.ExtraType extra;
+    private FoodType food;
+    private ExtraType extra;
     private Waiter waiter;
 
-    public Client(Waiter waiter, Menu.FoodType food, Menu.ExtraType extra) {
+    public Client(Waiter waiter, FoodType food, ExtraType extra) {
         this.waiter = waiter;
         this.food = food;
         this.extra = extra;

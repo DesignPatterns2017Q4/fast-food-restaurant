@@ -1,4 +1,4 @@
-package com.epam.training.designpatterns.fastfoodrestaurant;
+package com.epam.training.designpatterns.fastfoodrestaurant.food;
 
 public class Ketchup extends Extra{
 

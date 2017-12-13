@@ -1,5 +1,7 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
+import com.epam.training.designpatterns.fastfoodrestaurant.food.Food;
+
 public class Waiter{
     private Chef chef;
     private OrderQueue orders;

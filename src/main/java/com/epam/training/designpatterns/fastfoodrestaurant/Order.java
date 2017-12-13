@@ -2,21 +2,24 @@ package com.epam.training.designpatterns.fastfoodrestaurant;
 
 import java.util.Observable;
 
-public class Order extends Observable{
-    private Menu.FoodType food;
-    private Menu.ExtraType extra;
+import com.epam.training.designpatterns.fastfoodrestaurant.food.ExtraType;
+import com.epam.training.designpatterns.fastfoodrestaurant.food.FoodType;
 
-    public Order(Client client, Menu.FoodType food, Menu.ExtraType extra) {
+public class Order extends Observable{
+    private FoodType food;
+    private ExtraType extra;
+
+    public Order(Client client, FoodType food, ExtraType extra) {
         addObserver(client);
         this.food = food;
         this.extra = extra;        
     }
 
-    public Menu.FoodType getFood() {
+    public FoodType getFood() {
         return food;
     }
 
-    public Menu.ExtraType getExtra() {
+    public ExtraType getExtra() {
         return extra;
     }
 

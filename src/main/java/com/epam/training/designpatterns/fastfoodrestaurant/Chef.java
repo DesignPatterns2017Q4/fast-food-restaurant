@@ -1,7 +1,12 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
-import com.epam.training.designpatterns.fastfoodrestaurant.Menu.ExtraType;
-import com.epam.training.designpatterns.fastfoodrestaurant.Menu.FoodType;
+import com.epam.training.designpatterns.fastfoodrestaurant.food.Chips;
+import com.epam.training.designpatterns.fastfoodrestaurant.food.Food;
+import com.epam.training.designpatterns.fastfoodrestaurant.food.Hotdog;
+import com.epam.training.designpatterns.fastfoodrestaurant.food.Ketchup;
+import com.epam.training.designpatterns.fastfoodrestaurant.food.Mustard;
+import com.epam.training.designpatterns.fastfoodrestaurant.food.ExtraType;
+import com.epam.training.designpatterns.fastfoodrestaurant.food.FoodType;
 
 public class Chef {
     private OrderQueue orders;

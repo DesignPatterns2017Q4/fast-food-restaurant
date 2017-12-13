@@ -1,4 +1,4 @@
-package com.epam.training.designpatterns.fastfoodrestaurant;
+package com.epam.training.designpatterns.fastfoodrestaurant.food;
 
 public abstract class Extra implements Food {
     Food food;

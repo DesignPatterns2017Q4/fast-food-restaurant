@@ -3,19 +3,19 @@ package com.epam.training.designpatterns.fastfoodrestaurant;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Queue;
-import java.util.LinkedList;
+import com.epam.training.designpatterns.fastfoodrestaurant.food.ExtraType;
+import com.epam.training.designpatterns.fastfoodrestaurant.food.FoodType;
 
 public class ClientTest {
 
 	@Test
 	public void testCreateNewClient() {
 
-		Queue<Order> orders = new LinkedList<Order>();
+		OrderQueue orders = new OrderQueue();
         Chef chef = new Chef(orders);
         Waiter waiter = new Waiter(chef, orders);
         
-        Client client = new Client(waiter, Menu.FoodType.Hotdog, Menu.ExtraType.Ketchup);
+        Client client = new Client(waiter, FoodType.Hotdog, ExtraType.Ketchup);
         
 		Assert.assertEquals(Client.class, client.getClass());
 

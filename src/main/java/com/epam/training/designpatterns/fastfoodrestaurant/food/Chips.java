@@ -1,4 +1,4 @@
-package com.epam.training.designpatterns.fastfoodrestaurant;
+package com.epam.training.designpatterns.fastfoodrestaurant.food;
 
 public class Chips implements Food {
     public double effect(double happines) {
