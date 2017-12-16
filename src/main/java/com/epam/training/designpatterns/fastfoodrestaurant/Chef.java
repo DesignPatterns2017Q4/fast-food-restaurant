@@ -8,23 +8,34 @@ public class Chef {
 
         System.out.println("Preparing order: " + order);
 
-        Class<? extends Food> orderedBaseFood = order.getFood(); // Unchecked assignment
-        Class<? extends Food> orderedExtra = order.getExtra(); // Unchecked assignment
+        // A switch-case nehezen bővíthető, ha mondjuk lesz egy új ételfajta
+        // if-else if- else se lenne jobb
 
-        Food baseFoodInstance = null;
-        Food extraInstance = null;
+        Food baseFood;
+        switch (order.getFood()) {
 
-        try {
-            // Az ételek csak itt készülnek el, de a típusok (itt: Food, Hotdog és Ketchup)
-            // összekötik a Client és a Chef osztályokat
-            baseFoodInstance = orderedBaseFood.getConstructor().newInstance();
-            // Compile time sokat elbír, későn, már run time jöhetnek hibák, pl. elírom így getConstructor(Hotdog.class)
-            // És ha nincs extra?
-            extraInstance = orderedExtra.getConstructor(Food.class).newInstance(baseFoodInstance);
-        } catch (IllegalAccessException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
-            e.printStackTrace();
+            // A szakács készíti az ételt
+            // A FoodChoice enum és a Food interfészt implementáló osztályok külön fejlődhetnek
+            // Legfeljebb a szakács nem minden, az enumban szereplő, ételt tud értelmezni és elkészíteni
+            // Illetve megjelenhetnek új ételek, de amíg az enumba nincsenek felvéve, addig nem rendelhetők
+            // A FoodChoice és az ExtraChoice enum így is összeköti a Client és a Chef osztályokat (mindkettőnek
+            // ismernie kell ezeket a típusokat, hogy működjön a folyamat)
+            case HOTDOG:
+                baseFood = new Hotdog();
+                break;
+            default:
+                throw new IllegalArgumentException();
         }
 
-        return extraInstance;
+        Food extra;
+        switch (order.getExtra()) {
+            case KETCHUP:
+                extra = new Ketchup(baseFood);
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+
+        return extra;
     }
 }
