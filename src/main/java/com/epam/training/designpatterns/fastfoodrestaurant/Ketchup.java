@@ -14,8 +14,6 @@ public class Ketchup implements Food {
 
     @Override
     public String toString() {
-        return "Ketchup{" +
-                "baseFood=" + baseFood +
-                '}';
+        return "Ketchup{" + "baseFood=" + baseFood + '}';
     }
 }
