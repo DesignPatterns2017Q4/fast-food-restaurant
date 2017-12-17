@@ -1,40 +1,32 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Chef {
+
+    // 2 Map van switch-case vagy if-else if-else helyett, ezek a mapek akár externalizálhatók konfigba, könnyen bővíthetők
+    // vö. SOLID elvek: Open-Closed Principle
+    private Map<String, FoodFactory> foodFactories = new HashMap<>();;
+    private Map<String, ExtraFactory> extraFactories = new HashMap<>();;
+
+    {
+        foodFactories.put("hotdog", new HotdogFactory());
+        extraFactories.put("ketchup", new KetchupFactory());
+    }
 
     public Food prepare(Order order) {
 
         System.out.println("Preparing order: " + order);
 
-        // A switch-case nehezen bővíthető, ha mondjuk lesz egy új ételfajta
-        // if-else if- else se lenne jobb
+        String orderedFood = order.getFood();                           // Validáció?
+        FoodFactory foodFactory = foodFactories.get(orderedFood);       // Az éppen rendelt ételhez keresünk factory-t
+        Food food = foodFactory.create();                               // Polimorfikus hívás! ;-)
 
-        Food baseFood;
-        switch (order.getFood()) {
-
-            // A szakács készíti az ételt
-            // A FoodChoice enum és a Food interfészt implementáló osztályok külön fejlődhetnek
-            // Legfeljebb a szakács nem minden, az enumban szereplő, ételt tud értelmezni és elkészíteni
-            // Illetve megjelenhetnek új ételek, de amíg az enumba nincsenek felvéve, addig nem rendelhetők
-            // A FoodChoice és az ExtraChoice enum így is összeköti a Client és a Chef osztályokat (mindkettőnek
-            // ismernie kell ezeket a típusokat, hogy működjön a folyamat)
-            case HOTDOG:
-                baseFood = new Hotdog();
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
-
-        Food extra;
-        switch (order.getExtra()) {
-            case KETCHUP:
-                extra = new Ketchup(baseFood);
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
+        String orderedExtra = order.getExtra();                         // Validáció?
+        ExtraFactory extraFactory = extraFactories.get(orderedExtra);   // Az éppen rendelt extrához keresünk factory-t
+        Food extra = extraFactory.create(food);                         // Polimorfikus hívás! ;-)
 
         return extra;
     }

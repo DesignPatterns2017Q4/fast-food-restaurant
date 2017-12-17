@@ -3,10 +3,10 @@ package com.epam.training.designpatterns.fastfoodrestaurant;
 public class Order {
 
     private final Client client;
-    private final FoodChoice food;
-    private final ExtraChoice extra;
+    private final String food;
+    private final String extra;
 
-    public Order(Client client, FoodChoice food, ExtraChoice extra) {
+    public Order(Client client, String food, String extra) {
         this.client = client;
         this.food = food;
         this.extra = extra;
@@ -16,11 +16,11 @@ public class Order {
         return client;
     }
 
-    public FoodChoice getFood() {
+    public String getFood() {
         return food;
     }
 
-    public ExtraChoice getExtra() {
+    public String getExtra() {
         return extra;
     }
 

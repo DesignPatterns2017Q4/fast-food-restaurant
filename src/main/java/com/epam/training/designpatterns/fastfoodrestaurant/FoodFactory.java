@@ -1,6 +1,6 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
-public enum FoodChoice {
+public interface FoodFactory {
 
-    HOTDOG
+    Food create();
 }

@@ -1,6 +1,6 @@
 package com.epam.training.designpatterns.fastfoodrestaurant;
 
-public enum ExtraChoice {
+public interface ExtraFactory {
 
-    KETCHUP
+    Food create(Food baseFood);
 }
